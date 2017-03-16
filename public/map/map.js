@@ -30,8 +30,7 @@ angular.module('mapApp.map', [])
         if (status === google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
         directionsDisplay.setMap($window.map);
-        // directionsDisplay.setPanel(document.getElementById('directionsList'));
-        // $scope.directions.showList = true;
+        directionsDisplay.setPanel(document.getElementById('directions-panel'));
       } else {
         alert('Does not work bruh');
       }
