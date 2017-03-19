@@ -1,0 +1,2 @@
+window.CLIENT_ID = 'CLIENT_ID';
+window.CLIENT_SECRET = 'CLIENT_SECRET'

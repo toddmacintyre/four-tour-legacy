@@ -2,4 +2,4 @@ node_modules/
 bower_components/
 .env
 
-public/key/apiKeys.js
+public/config/api.js
