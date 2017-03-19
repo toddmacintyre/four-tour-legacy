@@ -1,9 +1,9 @@
 angular.module('mapApp.home', [])
 .controller('homeCtrl', function($rootScope, $scope, $location) {
 
-  $scope.enterAddress = function(){
-	$location.path('/map');
-	console.log($rootScope.address)
+  $scope.enterAddress = function() {
+		$location.path('/map');
+		console.log($rootScope.address)
   }
 })
 
