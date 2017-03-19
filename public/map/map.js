@@ -1,39 +1,101 @@
+var env = require('dotenv').config();
+
 angular.module('mapApp.map', [])
-.controller('mapCtrl', function($rootScope, $scope, $window) {
-  console.log($rootScope.lat, $rootScope.lng)
-  var uluru = {lat: $rootScope.lat, lng: $rootScope.lng}
+.controller('mapCtrl', function($scope, $window, $http) {
+    
+  // INITIALIZE GOOGLE MAP
+  
+  $scope.initMap = function() {
+    var tourMap = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 40.750222, lng: -73.990282}, // Manhattan
+      zoom: 12
+    });
+    findUser(tourMap);
+  };
+  
+  // HTML5 GEOLOCATION
+  
+  function findUser(map) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var currPos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        fsSearch(currPos, map);
+      }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  };
+  
+  // FOURSQUARE API CALL
+  
+  function fsSearch(position, map) {
+    $scope.fsState = 'loading';
 
-  var manhattan = new google.maps.LatLng(40.7711329, -73.9741874);
-  $window.map = new google.maps.Map(document.getElementById('map'), {
-    control: {},
-    zoom: 12,
-    center: manhattan
-  });
-  $window.marker = new google.maps.Marker({
-    position: uluru,
-    map: map
-  });
+    $http.get("https://api.foursquare.com/v2/venues/explore/?ll=" + position.lat + "," + position.lng + "&limit=5&radius=1600&section=arts&openNow=1&sortByDistance=1" + "&client_id=" + process.env.CLIENT_ID + "&client_secret=" + process.env.CLIENT_SECRET + "&v=20170319&m=foursquare")
+      .then(function(result, status) {
+        var fsPlaces = result.data.response.groups[0].items;
+        var fsPlacesLatLng = [];
+        fsPlaces.forEach(function(place) {
+          fsPlacesLatLng.push(
+            {
+              location: {
+                lat: place.venue.location.lat, 
+                lng: place.venue.location.lng
+              },
+              stopover: true
+            }
+          );
+        });
+        $scope.fsState = 'loaded';
+        drawTour(position, map, fsPlacesLatLng);
+      }, function(data, status) {
+        $scope.fsState = 'noResult';
+      });
+  };
+  
+  // SET MAP TO CURRENT POSITION WITH DIRECTIONS FOR TOUR
+  
+  function drawTour(position, map, fsWaypoints) {
+    
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer();
 
-  var directionsService = new google.maps.DirectionsService;
-  var directionsDisplay = new google.maps.DirectionsRenderer({map: $window.map});
-  var stepDisplay = new google.maps.InfoWindow;
+    // var infoWindow = new google.maps.InfoWindow({map: map});
+    // infoWindow.setPosition(position);
+    // infoWindow.setContent('You are here.');
 
-  $scope.request = {
-      origin: $scope.origin,
-      destination: $scope.destination,
-      travelMode: 'WALKING'
+    map.setCenter(position);
+    map.setZoom(16); 
+    directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById('directions-panel'));
+    var request = {
+      origin: position,
+      destination: position,
+      travelMode: 'WALKING',
+      waypoints: fsWaypoints,
+      optimizeWaypoints: true
     };
 
-  $scope.getDirections = function () {
-      console.log($scope.request);
-      directionsService.route($scope.request, function (response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
+    directionsService.route(request, function (response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        directionsDisplay.setMap($window.map);
-        directionsDisplay.setPanel(document.getElementById('directions-panel'));
-      } else {
-        alert('Does not work bruh');
       }
-      });
-    }
+    });
+  };
+
+  // ERROR HANDLER
+  
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+  };
+
 });
