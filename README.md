@@ -1,6 +1,5 @@
-# Project Name
-> Routejs 66
-> Pithy project description
+# Four Tour
+> Social Generated Walking Tour
 
 ## Team
 
