@@ -45,8 +45,8 @@ angular.module('mapApp.map', [])
       latitude = $rootScope.lat;
       longitude = $rootScope.lng;
     }
-
-    $http.get("https://api.foursquare.com/v2/venues/explore/?ll=" + latitude + "," + longitude + "&limit=5&radius=1600&section=arts&openNow=1&sortByDistance=1" + "&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&v=20170319&m=foursquare")
+    var data = {"latitude": latitude, "longitude": longitude}
+    $http.post('/api/foursquare', data)
       .then(function(result, status) {
         var fsPlaces = result.data.response.groups[0].items;
         var fsPlacesLatLng = [];
