@@ -14,8 +14,8 @@ require('./config/routes.js')(app, express)
 
 
 // var port = process.env.PORT || 8000;
-app.listen(8000, function(){
-  console.log("Listening on port", 8000)
+app.listen(3000, function(){
+  console.log("Listening on port", 3000)
 })
 
 module.exports = app;
