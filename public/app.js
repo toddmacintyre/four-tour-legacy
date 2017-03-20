@@ -3,6 +3,8 @@ angular.module("mapApp", [
   "mapApp.home",
   "ngRoute"
 ])
+
+// recommend changing to ui-router bc of errors loading
 .config(function($routeProvider) {
   $routeProvider
   .when('/', {
