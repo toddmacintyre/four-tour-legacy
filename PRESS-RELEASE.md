@@ -1,5 +1,5 @@
-# Project Name #
-  >Routejs 66
+# Four Tour #
+  >Social Generated Walking Tour
 <!--
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
 
@@ -27,22 +27,28 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Summary ##
   <!-- > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good. -->
-  >
+  > Based on a location, a tour of 5 venues will be generated. There is a marker for each place and is set in an optimized order. The benefit of this is to be able to check out trending venues near where you want to be.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  <!-- > Describe the problem your product solves. -->
+  > The problem of not knowing where to go in a new city and the time it takes to plan your day.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  <!-- > Describe how your product elegantly solves the problem. -->
+  > A tour of trending venues near a selected location.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  <!-- > A quote from a spokesperson in your company. -->
+  > "What a great way to see the local hotspots!!"
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  <!-- > Describe how easy it is to get started. -->
+  > Simply enter in a location or use your current location and watch your tour appear before your eyes.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  <!-- > Provide a quote from a hypothetical customer that describes how they experienced the benefit. -->
+  > "What a great tool for seeing new hip places!"
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  <!-- > Wrap it up and give pointers where the reader should go next. -->
+  > Things to add: add venue details to the markers, have more options for the user in the foursquare api parameters, and have user log in and use a database to store past tours.

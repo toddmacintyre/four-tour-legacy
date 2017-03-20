@@ -62,6 +62,7 @@ angular.module('mapApp.map', [])
           );
         });
         $scope.fsState = 'loaded';
+        //the start and end is based on position which is the current location position not entered
         drawTour(position, map, fsPlacesLatLng);
       }, function(data, status) {
         $scope.fsState = 'noResult';
@@ -83,6 +84,7 @@ angular.module('mapApp.map', [])
     map.setZoom(16);
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById('directions-panel'));
+    // position is geolocation (would like to change to be changed if entered a location)
     var request = {
       origin: position,
       destination: position,

@@ -1,3 +1,5 @@
+//outdated code that is not used
+
 angular.module('mapApp.map', [])
 .controller('mapCtrl', function($scope, $window) {
   $window.map = new google.maps.Map(document.getElementById('map'), {
