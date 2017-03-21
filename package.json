@@ -2,7 +2,7 @@
   "name": "routejs-66",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js"
@@ -24,8 +24,6 @@
     "mongo": "^0.1.0",
     "mongoose": "^4.8.6",
     "morgan": "^1.8.1",
-    "nodemon": "^1.11.0",
-    "path": "^0.12.7",
     "request": "^2.81.0"
   }
 }
