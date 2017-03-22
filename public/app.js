@@ -15,4 +15,4 @@ angular.module("mapApp", [
     templateUrl: "./map/map.html",
     controller: "mapCtrl"
   })
-})
+});
