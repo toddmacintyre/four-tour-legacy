@@ -57,7 +57,7 @@
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-      <ul class="sidebar-nav">
+      <!--<ul class="sidebar-nav">
         <li class="sidebar-brand">
         </li>
         <li>
@@ -81,17 +81,20 @@
         <li>
           <a href="#">Direction 7</a>
         </li>
-      </ul>
+      </ul>-->
+      <div id="directions-panel"></div>
     </div>
     <!-- /#sidebar-wrapper -->
 
     <div class="header-content">
       <div class="header-content-inner">
-        <h1 id="homeHeading">Social Generated Walking Tours</h1>
-        <hr>
+        <div ng-show="!mapRender">
+          <h1 id="homeHeading">Social Generated Walking Tours</h1>
+          <hr>
+        </div>
         <!--add ng if to toggle button display-->
         <div>
-          <a ng-show="mapRender" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Directions</a>
+          <a ng-show="mapRender" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show Directions</a>
         </div>
         <div ng-view></div>
       </div>
