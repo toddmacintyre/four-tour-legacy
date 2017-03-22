@@ -90,7 +90,9 @@
         <h1 id="homeHeading">Social Generated Walking Tours</h1>
         <hr>
         <!--add ng if to toggle button display-->
-        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+        <div>
+          <a ng-if="mapRender" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Directions</a>
+        </div>
         <div ng-view></div>
       </div>
     </div>
