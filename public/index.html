@@ -61,25 +61,25 @@
         <li class="sidebar-brand">
         </li>
         <li>
-          <a href="#">Dashboard</a>
+          <a href="#">Direction 1</a>
         </li>
         <li>
-          <a href="#">Shortcuts</a>
+          <a href="#">Direction 2</a>
         </li>
         <li>
-          <a href="#">Overview</a>
+          <a href="#">Direction 3</a>
         </li>
         <li>
-          <a href="#">Events</a>
+          <a href="#">Direction 4</a>
         </li>
         <li>
-          <a href="#">About</a>
+          <a href="#">Direction 5</a>
         </li>
         <li>
-          <a href="#">Services</a>
+          <a href="#">Direction 6</a>
         </li>
         <li>
-          <a href="#">Contact</a>
+          <a href="#">Direction 7</a>
         </li>
       </ul>
     </div>
@@ -90,7 +90,9 @@
         <h1 id="homeHeading">Social Generated Walking Tours</h1>
         <hr>
         <!--add ng if to toggle button display-->
-        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+        <div>
+          <a ng-show="mapRender" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Directions</a>
+        </div>
         <div ng-view></div>
       </div>
     </div>
