@@ -380,3 +380,24 @@ body {
   padding-bottom: 300px;
   overflow: scroll;
 }
+
+select {
+  padding: 15px 30px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  height: 50px;
+  border: none;
+  border-radius: 300px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+  background-color: #F05F40;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
