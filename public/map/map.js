@@ -1,7 +1,22 @@
 angular.module('mapApp.map', [])
-.controller('mapCtrl', function($rootScope, $scope, $window, $http) {
+.controller('mapCtrl', function($rootScope, $scope, $window, $http, $location) {
 
   // INITIALIZE GOOGLE MAP
+  
+  $rootScope.mapRender = true;
+  $rootScope.$on("$locationChangeStart", function() {
+    // This will run on every location change, before the
+    // whole route is processed. Good for things like Identity
+    // management.
+    console.log($location.path())
+    if ($location.path() === "/map") {
+      $rootScope.mapRender = true;
+    } else {
+      $rootScope.mapRender = false;
+    }
+    
+    console.log($rootScope.mapRender);
+  });
 
   $scope.initMap = function() {
     var tourMap = new google.maps.Map(document.getElementById('map'), {
@@ -84,6 +99,8 @@ angular.module('mapApp.map', [])
     map.setZoom(16);
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById('directions-panel'));
+    // $rootScope.mapRender = true;
+    // console.log(`$rootScope.mapRender = ${$rootScope.mapRender}`);
     // position is geolocation (would like to change to be changed if entered a location)
     var request = {
       origin: position,
