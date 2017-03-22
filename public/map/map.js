@@ -94,6 +94,7 @@ angular.module('mapApp.map', [])
     };
 
     directionsService.route(request, function (response, status) {
+      console.log('DIR SVC ROUTE RESPONSE = ', response);
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
       }

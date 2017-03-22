@@ -1,43 +1,32 @@
 <div>
   <p>Submit an address or choose current location to get a personalized walking tour.</p>
   <form class="form-inline" ng-submit="enterAddress()" ng-enter="enterAddress()">
-    <div class="form-group">
+<!--     <div class="form-group">
       <input type="text" class="form-control" ng-model="$root.address" googleplace="" placeholder="Enter an address...">
+    </div> -->
+    <div class="form-group">
+      <button type="button" id="geoLocator" ng-click="geoLocate()">
+        <i class="fa fa-location-arrow fa-2x fa-fw" aria-hidden="true"></i>
+      </button>
     </div>
-    <p></p>
+    <div class="form-group">
+      <input type="text" class="search-input" ng-model="$root.address" placeholder="  Start from current location or enter an address ...">
+    </div>
+<!--     <p></p>
     <button id="geo" type="submit" class="btn btn-primary btn-xl page-scroll">Search by Current Location</button>
+    <br> -->
+    <div class="form-group btn-group">
+      <button class="dropdown-toggle" ng-model="category" type="button" id="categories" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{ chosenCategory }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="category in categories" ng-click="chooseCategory(category)"> {{category.name}} </li>
+      </ul>
+    </div>
     <br>
-    <select id='categories' data-ng-model='category' ng-change="getValue()">
-        <option value="" disabled selected hidden>Choose a category</option>
-        <option value="4bf58dd8d48988d1e0931735">Coffee</option>
-        <option value="4d4b7105d754a06374d81259">Food</option>
-        <option value="4d4b7104d754a06370d81259">Fun</option>
-        <option value="4d4b7105d754a06376d81259">Nightlife</option>
-        <option value="4bf58dd8d48988d103951735">Threads</option>
-    </select>
     <br>
     <button id="entered" type="submit" class="btn btn-primary btn-xl page-scroll">Search</button>
   </form>
 
 </div>
-
-
-
-
-<!-- <form class="form-inline splash-form"  ng-submit="searching = true; getEvents(location)">
-    <div class="form-group"> -->
-      <!-- The stalk button is not as creepy as it sounds, it it what is responsible for getting geo-location.
-            We like to have fun ;)-->
-<!--       <button type="button" id='stalkButton' class="btn btn-default btn-sm pull-left" ng-click="locating = true; getLocation()">
-        <i ng-class="{'fa fa-location-arrow fa-2x fa-fw': !locating, 'fa fa-refresh fa-spin fa-2x fa-fw': locating }" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div class="form-group">
-      <input class="search-input" ng-model="location" type="text" name="search" placeholder="  Where are you?" value="{{ address }}" required/>
-    </div>
-    <div class="form-group">
-      <button class="btn splash-submit" type="submit">
-        <i ng-class="{'fa fa-search': !searching, 'fa fa-refresh fa-spin submitter': searching }" aria-hidden="true"></i> Search
-      </button>
-    </div>
-  </form> -->

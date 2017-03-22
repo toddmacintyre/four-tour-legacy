@@ -1,10 +1,32 @@
 angular.module('mapApp.home', [])
 .controller('homeCtrl', function($rootScope, $scope, $location) {
 
+	$scope.pulldownDefault = 'Choose a category';
+	$scope.chosenCategory = $scope.pulldownDefault;
+	$scope.categories = [{name: "Coffee", catId: "4bf58dd8d48988d1e0931735"},
+											{name: "Food", catId: "4d4b7105d754a06374d81259"},
+											{name: "Fun", catId: "4d4b7104d754a06370d81259"},
+											{name: "Nightlife",catId: "4d4b7105d754a06376d81259"},
+											{name: "Threads", catId: "4bf58dd8d48988d103951735"}];
+
   $scope.enterAddress = function() {
 		$location.path('/map');
 		console.log($rootScope.address)
   }
+
+  $scope.chooseCategory = function(category) {
+  	$scope.chosenCategory = category.name;
+  }
+
+  $scope.geoLocate = function() {
+  	//TBD
+  };
+
+  $scope.reset = function() {
+  	$root.address = '';
+  	$scope.chosenCategory = $scope.pulldownDefault;
+  }
+
 })
 
 .directive('googleplace', function($rootScope) {
