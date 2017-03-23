@@ -5,9 +5,6 @@ angular.module('mapApp.map', [])
   
   $rootScope.mapRender = true;
   $rootScope.$on("$locationChangeStart", function() {
-    // This will run on every location change, before the
-    // whole route is processed. Good for things like Identity
-    // management.
     console.log($location.path())
     if ($location.path() === "/map") {
       $rootScope.mapRender = true;
