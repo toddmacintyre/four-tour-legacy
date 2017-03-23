@@ -19,8 +19,11 @@ angular.module("mapApp", [
 })
 
 .run(function($rootScope,mapping) {
-    $rootScope.origin = {};
-    $rootScope.destination = {};
+    $rootScope.user = '';
+    $rootScope.origin;
+    $rootScope.coords = {};
     $rootScope.located = false;
-    mapping.userLocation();
+    $rootScope.chosenCategoryId = '';
+    $rootScope.useGeo = false;
+    mapping.userLocator();
 })

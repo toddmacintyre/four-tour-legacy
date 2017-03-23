@@ -2,15 +2,18 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
 
 .controller('homeCtrl', function($rootScope, $scope, $location, $http, mapping) {
 
-	$scope.useGeo = false;
 	$scope.locating = false;
 	$scope.pulldownDefault = {name: 'Choose a category'};
 	$scope.chosenCategory = $scope.pulldownDefault;
 	$scope.categories = [{name: "Coffee", catId: "4bf58dd8d48988d1e0931735"},
-											{name: "Food", catId: "4d4b7105d754a06374d81259"},
+											{name: "Bakeries", catId: "4bf58dd8d48988d16a941735"},
+											{name: "Booze",catId: "4bf58dd8d48988d116941735"},
+											// {name: "Food", catId: "4d4b7105d754a06374d81259"},
 											{name: "Fun", catId: "4d4b7104d754a06370d81259"},
-											{name: "Nightlife",catId: "4d4b7105d754a06376d81259"},
-											{name: "Threads", catId: "4bf58dd8d48988d103951735"}];
+											{name: "Threads", catId: "4bf58dd8d48988d103951735"},
+											{name: "History", catId: "4deefb944765f83613cdba6e"}];
+
+
 
 	$scope.chooseCategory = function(category) {
   	$scope.chosenCategory = category;
@@ -20,48 +23,58 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
   	$scope.locating = true;
   	if ($rootScope.located) {
   		setTimeout(function() {
-  			$scope.origin = 'lat: ' + mapping.user.lat + ', lng: ' + mapping.user.lng;
-  			$scope.useGeo = true;
+  			$scope.origin = $rootScope.origin;
+  			$rootScope.useGeo = true;
   			$scope.locating = false;
     		$scope.$apply();
   		}, 1750);
   	} else {
-  		if (navigator.geolocation) {
-  			navigator.geolocation.getCurrentPosition(function(position) {
-      		$scope.origin = 'lat: ' + position.coords.latitude + ', lng: ' + position.coords.longitude;
-        	$scope.useGeo = true;
-        	$scope.locating = false;
-    			$scope.$apply();
-        });
-      } else {
-      	alert("Sorry, your location couldn't be found. Please enter an address.");
-    	}
+  		// console.log('RECURSION!!!');
+    	setTimeout($scope.geoLocate, 500);
     }
+    console.log('GEOLOCATE ORIGIN = ', $rootScope.origin);
   };
 
+  // $scope.originScreener = function() {
+  // 	if ($rootScope.useGeo) {
+  // 		$scope.getTour();
+  // 	} else {
+  // 		$rootScope.origin = $scope.origin;
+  // 		mapping.latLngFinder($scope.origin, function() {
+  // 			console.log('FINISHED LATLNGFINDER CALL IN HOME.JS');
+  // 		});
+  // 		$scope.getTour();
+  // 	}
+  // }
+
   $scope.getTour = function() {
-  	if(!$rootScope.origin || !$rootScope.destination || $scope.chosenCategory.name === "Choose a category") {
-  		alert('Please make sure you have chosen a starting point, destination, and category');
+  	$rootScope.chosenCategoryId = $scope.chosenCategory.catId;
+  	if(!$rootScope.origin || $scope.chosenCategory.name === "Choose a category") {
+  		alert('Please make sure you have chosen a starting point and category');
   	} else {
+  		if (!$rootScope.useGeo) {
+				$rootScope.coords.lat = $rootScope.origin.lat();
+        $rootScope.coords.lng = $rootScope.origin.lng();
+  		}
   		$location.path('/map');
   	}
-  	//$rootScope.origin and $rootScope.destination have lat/lng coords
-  	//$scope.chosenCategory.catId has Foursquare category ID
   };
 
   $scope.reset = function() {
   	$scope.origin = '';
-  	$scope.destination = '';
+  	$rootScope.origin = $rootScope.user;
   	$scope.chosenCategory = $scope.pulldownDefault;
   };
 
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-      var origin = $scope.origin.getPlace().geometry.location;
-      var dest = $scope.destination.getPlace().geometry.location;
-      $rootScope.origin.lat = origin.lat();
-      $rootScope.origin.lng = origin.lng();
-      $rootScope.destination.lat = dest.lat();
-      $rootScope.destination.lng = dest.lng();
+      $rootScope.origin = $scope.origin.getPlace().geometry.location;
+      console.log('AUTOCOMPLETE ORIGIN = ', $rootScope.origin);
+      console.log('ORIGIN.LAT = ', $rootScope.origin.lat());
+      // var dest = $scope.destination.getPlace().geometry.location;
+      // $rootScope.origin.lat = origin.lat();
+      // $rootScope.origin.lng = origin.lng();
+      // $rootScope.destination.lat = dest.lat();
+      // $rootScope.destination.lng = dest.lng();
 	});
 
 })

@@ -14,6 +14,17 @@ module.exports = function (app, express) {
         res.send(body)
       })
   })
+
+  app.post('/api/geocode', function(req, res) {
+    request("https://maps.googleapis.com/maps/api/geocode/json?" + req.body.search + "&key=AIzaSyBvvtXqBG-JFeJrgzlKCNm-1GllQNiag1s", function (error, response, body) {
+        if (error) {
+          console.log('BACKEND GEOCODE ERROR', error);
+        } else {
+        res.send(body)
+        }
+    })
+  })
+
 }
 
 
