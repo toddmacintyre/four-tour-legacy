@@ -1,3 +1,4 @@
+@import url('FLEX/info-image.css');
 html,
 body {
   height: 100%;
@@ -350,8 +351,8 @@ body {
   webkit-tap-highlight-color: #222222;
 }
 #map {
-  top: 30px;
-  height: 400px;
+  top: 20px;
+  height: 600px;
   width: 100%;
  }
 
@@ -559,6 +560,14 @@ body {
       position: relative;
       margin-right: 0;
   }
+}
+
+.infoWin1{
+  color: Black;
+}
+
+.infoWin2{
+  color: Black;
 }
 
 /*------------------------*/
