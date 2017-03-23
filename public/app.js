@@ -16,3 +16,8 @@ angular.module("mapApp", [
     controller: "mapCtrl"
   })
 })
+
+.run(function($rootScope) {
+    $rootScope.origin = {};
+    $rootScope.destination = {};
+})
