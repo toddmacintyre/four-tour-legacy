@@ -9,21 +9,34 @@ angular.module('mapApp.home', [])
 											{name: "Nightlife",catId: "4d4b7105d754a06376d81259"},
 											{name: "Threads", catId: "4bf58dd8d48988d103951735"}];
 
-  $scope.enterAddress = function() {
-		$location.path('/map');
-		console.log($rootScope.address)
-  }
+  // $scope.enterAddress = function() {
+		// $location.path('/map');
+		// console.log($rootScope.address)
+  // }
 
   $scope.chooseCategory = function(category) {
   	$scope.chosenCategory = category.name;
   }
 
   $scope.geoLocate = function() {
-  	//TBD
+  	if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        $rootScope.origin = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+				$scope.origin = 'lat: ' + $rootScope.origin.lat + ', lng: ' + $rootScope.origin.lng;
+    	});
+    } else {
+      // Browser doesn't support Geolocation - DEAL WITH THIS!!!
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
   };
 
+
   $scope.reset = function() {
-  	$root.address = '';
+  	$scope.origin = '';
+  	$scope.destination = '';
   	$scope.chosenCategory = $scope.pulldownDefault;
   }
 
@@ -32,12 +45,10 @@ angular.module('mapApp.home', [])
 .directive('googleplace', function($rootScope) {
 	return {
 		require : 'ngModel',
-		link : function(scope, element, attrs, model) {
-			var options = {
-				types : [],
-			};
+		link : function($scope, element, attrs, model) {
+			var options = {};
 			//creating new autocomplete object when searching in input bar
-			scope.gPlace = new google.maps.places.Autocomplete(element[0],
+			$scope.gPlace = new google.maps.places.Autocomplete(element[0],
 					options);
 			// on exiting search, it will listen for entered string before submitting
 			google.maps.event.addListener(scope.gPlace, 'place_changed',

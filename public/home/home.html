@@ -1,7 +1,8 @@
 <div>
-  <p>Submit an address or choose current location to get a personalized walking tour.</p>
-  <form class="form-inline" ng-submit="enterAddress()" ng-enter="enterAddress()">
-<!--     <div class="form-group">
+  <p>Going somewhere?  Use the power of social media to make better pitstops.</p>
+  <form class="form-inline" ng-submit="" ng-enter="">
+<!--       <form class="form-inline" ng-submit="enterAddress()" ng-enter="enterAddress()">
+<div class="form-group">
       <input type="text" class="form-control" ng-model="$root.address" googleplace="" placeholder="Enter an address...">
     </div> -->
     <div class="form-group">
@@ -10,11 +11,18 @@
       </button>
     </div>
     <div class="form-group">
-      <input type="text" class="search-input" ng-model="$root.address" placeholder="  Start from current location or enter an address ...">
+      <input type="text" class="origin-input" ng-model="origin" placeholder="  Start from current location or enter an address ..." googleplace>
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+      <input type="text" class="destination-input" ng-model="destination" placeholder="    ... and tell us where you're going." googleplace>
     </div>
 <!--     <p></p>
     <button id="geo" type="submit" class="btn btn-primary btn-xl page-scroll">Search by Current Location</button>
     <br> -->
+    <br>
+    <br>
     <div class="form-group btn-group">
       <button class="dropdown-toggle" ng-model="category" type="button" id="categories" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         {{ chosenCategory }}
@@ -27,6 +35,9 @@
     <br>
     <br>
     <button id="entered" type="submit" class="btn btn-primary btn-xl page-scroll">Search</button>
+    <br>
+    <br>
+    <button id="reset" type="submit" class="btn btn-primary btn-xl page-scroll" ng-click="reset()">Reset form</button>
   </form>
 
 </div>

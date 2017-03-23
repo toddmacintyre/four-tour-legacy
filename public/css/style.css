@@ -321,7 +321,7 @@ fieldset[disabled] .btn-primary.active {
 .btn {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   border: none;
-  border-radius: 300px;
+  border-radius: 10px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -429,7 +429,9 @@ body {
   margin-right: -4px;
 }
 
-.search-input {
+.origin-input {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: #F05F40;
   height: 50px;
   width: 36vw !important;
   background-color: white;
@@ -443,6 +445,19 @@ body {
 .fa-location-arrow {
   margin-top 3px;
   color: #F05F40;
+}
+
+.destination-input {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: #F05F40;
+  height: 50px;
+  width: 40.5vw !important;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-radius: 10px !important;
+  outline: none;
 }
 
 li:hover, li:focus {
