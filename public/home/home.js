@@ -1,7 +1,8 @@
-angular.module('mapApp.home', ['gm'])
+angular.module('mapApp.home', ['gm','four-tour-svcs'])
 
-.controller('homeCtrl', function($rootScope, $scope, $location) {
+.controller('homeCtrl', function($rootScope, $scope, $location, $http, mapping) {
 
+	$scope.useGeo = false;
 	$scope.locating = false;
 	$scope.pulldownDefault = {name: 'Choose a category'};
 	$scope.chosenCategory = $scope.pulldownDefault;
@@ -17,23 +18,36 @@ angular.module('mapApp.home', ['gm'])
 
   $scope.geoLocate = function() {
   	$scope.locating = true;
-  	if (navigator.geolocation) {
-  		navigator.geolocation.getCurrentPosition(function(position) {
-      	$rootScope.origin.lat = position.coords.latitude;
-        $rootScope.origin.lng = position.coords.longitude;
-        $scope.origin = 'lat: ' + $rootScope.origin.lat + ', lng: ' + $rootScope.origin.lng;
-        $scope.locating = false;
-        $scope.$apply();
-    	});
-    } else {
-      alert("Sorry, your location couldn't be found. Please enter an address.");
+  	if ($rootScope.located) {
+  		setTimeout(function() {
+  			$scope.origin = 'lat: ' + mapping.user.lat + ', lng: ' + mapping.user.lng;
+  			$scope.useGeo = true;
+  			$scope.locating = false;
+    		$scope.$apply();
+  		}, 1750);
+  	} else {
+  		if (navigator.geolocation) {
+  			navigator.geolocation.getCurrentPosition(function(position) {
+      		$scope.origin = 'lat: ' + position.coords.latitude + ', lng: ' + position.coords.longitude;
+        	$scope.useGeo = true;
+        	$scope.locating = false;
+    			$scope.$apply();
+        });
+      } else {
+      	alert("Sorry, your location couldn't be found. Please enter an address.");
+    	}
     }
   };
 
   $scope.getTour = function() {
+  	if(!$rootScope.origin || !$rootScope.destination || $scope.chosenCategory.name === "Choose a category") {
+  		alert('Please make sure you have chosen a starting point, destination, and category');
+  	} else {
+  		$location.path('/map');
+  	}
   	//$rootScope.origin and $rootScope.destination have lat/lng coords
   	//$scope.chosenCategory.catId has Foursquare category ID
-  }
+  };
 
   $scope.reset = function() {
   	$scope.origin = '';
@@ -51,3 +65,43 @@ angular.module('mapApp.home', ['gm'])
 	});
 
 })
+
+
+
+
+/*function fsSearch(position, map) {
+    $scope.fsState = 'loading';
+
+    // sets location based on entered location or Geolocation
+    var latitude;
+    var longitude;
+    if($rootScope.address === undefined){
+      latitude = position.lat;
+      longitude = position.lng;
+    } else {
+      latitude = $rootScope.lat;
+      longitude = $rootScope.lng;
+    }
+    var data = {"latitude": latitude, "longitude": longitude}
+    $http.post('/api/foursquare', data)
+      .then(function(result, status) {
+        var fsPlaces = result.data.response.groups[0].items;
+        var fsPlacesLatLng = [];
+        fsPlaces.forEach(function(place) {
+          fsPlacesLatLng.push(
+            {
+              location: {
+                lat: place.venue.location.lat,
+                lng: place.venue.location.lng
+              },
+              stopover: true
+            }
+          );
+        });
+        $scope.fsState = 'loaded';
+        //the start and end is based on position which is the current location position not entered
+        drawTour(position, map, fsPlacesLatLng);
+      }, function(data, status) {
+        $scope.fsState = 'noResult';
+      });
+  };*/

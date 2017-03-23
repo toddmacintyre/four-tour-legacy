@@ -1,7 +1,8 @@
 angular.module("mapApp", [
   "mapApp.map",
   "mapApp.home",
-  "ngRoute"
+  "ngRoute",
+  "four-tour-svcs"
 ])
 
 // recommend changing to ui-router bc of errors loading
@@ -17,7 +18,9 @@ angular.module("mapApp", [
   })
 })
 
-.run(function($rootScope) {
+.run(function($rootScope,mapping) {
     $rootScope.origin = {};
     $rootScope.destination = {};
+    $rootScope.located = false;
+    mapping.userLocation();
 })
