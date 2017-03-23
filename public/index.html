@@ -18,6 +18,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Angular Scripts -->
+<script src="map/slider.js"></script>
 <script src="map/map.js"></script>
 <script src="home/home.js"></script>
 <script src="app.js"></script>
@@ -35,8 +36,6 @@
 </head>
 
 <body id="page-top">
-
-
 
   <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -57,32 +56,8 @@
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper" class="sidebar-nav">
-      <!--<ul class="sidebar-nav">
-        <li class="sidebar-brand">
-        </li>
-        <li>
-          <a href="#">Direction 1</a>
-        </li>
-        <li>
-          <a href="#">Direction 2</a>
-        </li>
-        <li>
-          <a href="#">Direction 3</a>
-        </li>
-        <li>
-          <a href="#">Direction 4</a>
-        </li>
-        <li>
-          <a href="#">Direction 5</a>
-        </li>
-        <li>
-          <a href="#">Direction 6</a>
-        </li>
-        <li>
-          <a href="#">Direction 7</a>
-        </li>
-      </ul>-->
       <div id="directions-panel"></div>
+      <a ng-controller="sliderCtrl" ng-show="mapRender" ng-click="showDirections()" class="btn btn-default" id="menu-toggle">&nbsp;&nbsp;Directions</a>
     </div>
     <!-- /#sidebar-wrapper -->
 
@@ -92,16 +67,10 @@
           <h1 id="homeHeading">Social Generated Walking Tours</h1>
           <hr>
         </div>
-        <!--add ng if to toggle button display-->
-        <div>
-          <a ng-show="mapRender" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show Directions</a>
-        </div>
         <div ng-view></div>
       </div>
     </div>
   </header>
-  <script src="slider.js"></script>
-  
 
 </body>
 </html>
