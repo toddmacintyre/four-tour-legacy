@@ -1,6 +1,7 @@
 angular.module('mapApp.home', [])
 .controller('homeCtrl', function($rootScope, $scope, $location) {
 
+	$scope.locating = false;
 	$scope.pulldownDefault = 'Choose a category';
 	$scope.chosenCategory = $scope.pulldownDefault;
 	$scope.categories = [{name: "Coffee", catId: "4bf58dd8d48988d1e0931735"},
@@ -8,8 +9,7 @@ angular.module('mapApp.home', [])
 											{name: "Fun", catId: "4d4b7104d754a06370d81259"},
 											{name: "Nightlife",catId: "4d4b7105d754a06376d81259"},
 											{name: "Threads", catId: "4bf58dd8d48988d103951735"}];
-
-  // $scope.enterAddress = function() {
+	// $scope.enterAddress = function() {
 		// $location.path('/map');
 		// console.log($rootScope.address)
   // }
@@ -19,13 +19,19 @@ angular.module('mapApp.home', [])
   }
 
   $scope.geoLocate = function() {
+  	$scope.locating = true;
+  	console.log('STEP ONE');
   	if (navigator.geolocation) {
+  		console.log('STEP TWO');
       navigator.geolocation.getCurrentPosition(function(position) {
+      	console.log('STEP THREE');
+      	$scope.locating = false;
         $rootScope.origin = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-				$scope.origin = 'lat: ' + $rootScope.origin.lat + ', lng: ' + $rootScope.origin.lng;
+        $scope.origin = 'lat: ' + $rootScope.origin.lat + ', lng: ' + $rootScope.origin.lng;
+        $scope.locating = false;
     	});
     } else {
       // Browser doesn't support Geolocation - DEAL WITH THIS!!!
@@ -45,10 +51,10 @@ angular.module('mapApp.home', [])
 .directive('googleplace', function($rootScope) {
 	return {
 		require : 'ngModel',
-		link : function($scope, element, attrs, model) {
+		link : function(scope, element, attrs, model) {
 			var options = {};
 			//creating new autocomplete object when searching in input bar
-			$scope.gPlace = new google.maps.places.Autocomplete(element[0],
+			scope.gPlace = new google.maps.places.Autocomplete(element[0],
 					options);
 			// on exiting search, it will listen for entered string before submitting
 			google.maps.event.addListener(scope.gPlace, 'place_changed',

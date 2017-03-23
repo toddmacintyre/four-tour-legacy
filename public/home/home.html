@@ -6,8 +6,8 @@
       <input type="text" class="form-control" ng-model="$root.address" googleplace="" placeholder="Enter an address...">
     </div> -->
     <div class="form-group">
-      <button type="button" id="geoLocator" ng-click="geoLocate()">
-        <i class="fa fa-location-arrow fa-2x fa-fw" aria-hidden="true"></i>
+      <button type="button" id="geoLocator" ng-click="locating=true; geoLocate()">
+        <i ng-class="{'fa fa-location-arrow fa-2x fa-fw': !locating, 'fa fa-location-arrow fa-spin fa-2x fa-fw': locating }" aria-hidden="true"></i>
       </button>
     </div>
     <div class="form-group">
