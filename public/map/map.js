@@ -215,6 +215,24 @@ angular.module('mapApp.map', [])
     });
   };
 
+  function getYelp() {
+    var qs = {
+                latitude: $rootScope.coords.lat,
+                longitude: $rootScope.coords.lng,
+                radius: $rootScope.radius,
+                categories: $rootScope.chosenCategoryId,
+                limit: $rootScope.limit,
+                sort_by: $rootScope.sortBy
+              };
+    $http.post('/api/yelp', qs)
+      .then(function (result,status) {
+        var yelpPlaces = result.data.response.groups[0].items;
+        var yelpPlacesLatLng = [];
+      })
+      .catch(function(error) {
+        console.log('FRONTEND YELP API ERROR = ', error);
+      });
+  };
 
   // ERROR HANDLER
 

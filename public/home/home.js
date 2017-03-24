@@ -12,6 +12,12 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
 											{name: "Fun", catId: "4d4b7104d754a06370d81259"},
 											{name: "Threads", catId: "4bf58dd8d48988d103951735"},
 											{name: "History", catId: "4deefb944765f83613cdba6e"}];
+	// $scope.categories = [{name: "Coffee", catId: "coffee"},
+	// 										{name: "Bakeries", catId: "bakeries"},
+	// 										{name: "Booze",catId: "bars"},
+	// 										{name: "Fun", catId: "active"},
+	// 										{name: "Threads", catId: "fashion"},
+	// 										{name: "History", catId: "landmarks"}];
 
 
 

@@ -19,12 +19,15 @@ angular.module("mapApp", [
 })
 
 .run(function($rootScope,mapping) {
+    $rootScope.located = false;
+    $rootScope.useGeo = false;
+    $rootScope.radius = 1000;
     $rootScope.user = '';
     $rootScope.origin;
     $rootScope.coords = {};
-    $rootScope.located = false;
     $rootScope.chosenCategoryId = '';
-    $rootScope.useGeo = false;
+    $rootScope.limit = 5;
+    $rootScope.sortBy = "rating";
     mapping.userLocator();
 })
 
