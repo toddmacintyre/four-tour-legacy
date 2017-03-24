@@ -1,5 +1,5 @@
 <div>
-  <p>Going somewhere?  Use the power of social media to make better pitstops.</p>
+  <p>For those interested in walking in a big loop and having strangers recommend pitstops.</p>
   <form class="form-inline" ng-submit="" ng-enter="">
 <!--       <form class="form-inline" ng-submit="enterAddress()" ng-enter="enterAddress()">
 <div class="form-group">
@@ -27,6 +27,15 @@
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
         <li ng-repeat="category in categories" ng-click="chooseCategory(category)"> {{category.name}} </li>
+      </ul>
+    </div>
+    <div class="form-group btn-group">
+      <button class="dropdown-toggle" ng-model="radius" type="button" id="radii" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{ chosenRadius.plain }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="radius in radii" ng-click="chooseRadius(radius)"> {{radius.plain}} </li>
       </ul>
     </div>
     <br>
