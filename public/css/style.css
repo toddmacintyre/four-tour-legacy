@@ -352,8 +352,8 @@ body {
 }
 #map {
   top: 20px;
-  height: 600px;
-  width: 100%;
+  height: 700px;
+  width: 110%;
  }
 
 #floating-panel {
@@ -560,14 +560,6 @@ body {
       position: relative;
       margin-right: 0;
   }
-}
-
-.infoWin1{
-  color: Black;
-}
-
-.infoWin2{
-  color: Black;
 }
 
 /*------------------------*/
@@ -801,4 +793,103 @@ li:hover, li:focus {
       width: 70vw !important;
       border-radius: 10px !important;
     }*/
+    /*.infoImage{
+      justify-content: center;
+    }*/
+
+#infoWin2 {
+  /*    position: relative;*/
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  overflow: auto;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  /*padding: 10px;*/
+  /*background-color: #48b5e9;*/
+  /*color: white;*/
+  color: black;
+  margin: 1px;
+  border: 2px;
+  text-align: center;
+  border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
+
+#infoWin2 .placeTitle {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #48b5e9;
+  color: white;
+  border: 5px solid #fff; 
+  text-align: center;
+}
+
+#infoWin2 .placeSubTitle {
+  padding: 10px;
+}
+
+#infoWin2 .infoImage img {
+  width: 100%; 
+  display: block; 
+  float: left; 
+  border: 5px solid #fff; 
+  box-sizing: border-box;
+}
+
+#infoWin2 .infoImage img:nth-child(-n+2) {
+  width: 50%; 
+}
+#infoWin2 .telAndLink {
+  display: block;
+  clear: both;
+}
+
+/*.thumbnail:hover {
+    position:relative;
+    top:-25px;
+    left:-35px;
+    width:500px;
+    height:auto;
+    display:block;
+    z-index:999;
+}*/
+
+/*.thumbnail { 
+    transition: all .2s ease-in-out; 
+}*/
+
+#infoWin1 {
+  /*    position: relative;*/
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  overflow: auto;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  /*padding: 10px;*/
+  /*background-color: #48b5e9;*/
+  /*color: white;*/
+  color: black;
+  margin: 1px;
+  border: 2px;
+  text-align: center;
+  border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
+
+#infoWin1 .placeTitle {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #48b5e9;
+  color: white;
+  border: 5px solid #fff; 
+  text-align: center;
+}
+
+
+
+
 

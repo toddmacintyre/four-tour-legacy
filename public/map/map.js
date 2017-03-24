@@ -31,28 +31,6 @@ angular.module('mapApp.map', [])
         // console.log(result, "RESULT from FOURSQUARE")
         var fsPlaces = result.data.response.groups[0].items;
         var fsPlacesLatLng = [];
-
-        // fsPlaces.forEach(function(place){
-        //   var addressString = `${place.venue.name}, ${place.venue.location.address}, ${place.venue.location.city}, ${place.venue.location.state}, ${place.venue.location.cc}`;
-        //   var request = {
-        //     location: map.getCenter(),
-        //     radius: '500',
-        //     query: addressString
-        //   };
-        //   var service2 = new google.maps.places.PlacesService(map);
-        //   service2.textSearch(request, callback);
-        //   function callback(result, status){
-        //     console.log(result[0].place_id, "***********");
-        //     fsPlacesLatLng.push(
-        //     {
-        //       location:{placeId:result[0].place_id},//addressString,
-        //       stopover: true
-        //     }
-        //   );
-        //   }
-        // })
-
-
         fsPlaces.forEach(function(place) {
           var addressString = `${place.venue.name}, ${place.venue.location.address}, ${place.venue.location.city}, ${place.venue.location.state}, ${place.venue.location.cc}`;
           console.log(addressString);
@@ -88,22 +66,10 @@ angular.module('mapApp.map', [])
         polylineOptions: { strokeColor: "green" }
       });
 
-
-    // var stepDisplay = new google.maps.InfoWindow;
-    // var markerArray = [];
-
-
-    // var infoWindow = new google.maps.InfoWindow({map: map});
-    // infoWindow.setPosition(position);
-    // infoWindow.setContent('You are here.');
-
     map.setCenter(position);
-    map.setZoom(16);
+    map.setZoom(15);
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById('directions-panel'));
-    // $rootScope.mapRender = true;
-    // console.log(`$rootScope.mapRender = ${$rootScope.mapRender}`);
-    // position is geolocation (would like to change to be changed if entered a location)
     var request = {
       origin: position,
       destination: position,
@@ -113,7 +79,7 @@ angular.module('mapApp.map', [])
     };
 
     var placeIds = []
-    var infowindow = new google.maps.InfoWindow();
+    var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
     var service = new google.maps.places.PlacesService(map);
     directionsService.route(request, function (response, status) {
 
@@ -127,7 +93,7 @@ angular.module('mapApp.map', [])
         var imageUrls = [];
         if(place.photos){
           place.photos.forEach(function(object){
-            var urlPic = object.getUrl({'maxWidth': 200, 'maxHeight': 200})
+            var urlPic = object.getUrl({'maxWidth': 600, 'maxHeight': 600})
             imageUrls.push(urlPic);
           })
         }
@@ -135,19 +101,33 @@ angular.module('mapApp.map', [])
         var marker = new google.maps.Marker({
           map: map,
           icon:"/img/icon.PNG",
-          position: place.geometry.location
+          position: place.geometry.location,
+          optimized: false
         });
 
         // markerArray.push(marker);
         console.log(imageUrls, "URLSSSSS");
-        var template =  "<div class='infoWin1' style='width:250px; height:250px;'><strong style='font-size: 20px;'>" + place.name + "</strong>" +
-            "<br>" + place.formatted_address +
-            "<br>" + "<a style='color:blue;' target='_blank' href='"+ place.url + "'>" + place.url +"</a>" +
-            "<br>" + "Tel: " + place.formatted_phone_number + "</div>"
-        var imageTemplate = "<div class='infoWin2' style='width:550px; height:250px;'><strong style='font-size: 20px;'>" + place.name + "</strong>" +
-            "<br>" + place.formatted_address + '<br>'+ '<div class="infoImage"><img src =' +  imageUrls[0] +' >' +'<img src =' + imageUrls[1] +' >' + '<img src =' + imageUrls[2] +' ></div>' +
-            "<br>" + "<a style='color:blue;' target='_blank' href='"+ place.url + "'>" + place.url +"</a>" +
-            "<br>" + "Tel: " + place.formatted_phone_number + "</div>"
+        var template =  
+        '<div id="infoWin1">' 
+            +'<div class="placeTitle">'+ place.name + '</div>' +
+            '<br>' + place.formatted_address +
+            '<br>' + '<a style="color:blue;" target="_blank" href="+ place.url + ">' + "Google Maps Link." +'</a>' +
+            '<br>' 
+            + '</div>'
+        var imageTemplate = 
+        '<div id="infoWin2">'
+          +'<div class="placeTitle">' + place.name+ '</div>' 
+          +'<div class = "placeSubTitle">' + place.formatted_address + '</div>' 
+          +'<div class="infoImage">'
+            +'<img src = ' +  imageUrls[0] +'>' 
+            +'<img src =' + imageUrls[1] +'>'
+            + '<img src =' + imageUrls[2] +'>'
+          + '</div><br>' 
+          +'<div class="telAndLink">'
+          + '<a style="color:blue;" target="_blank" href="+ place.url + ">' + "Google Maps Link." +'</a><br>' 
+          + "Tel: " + place.formatted_phone_number 
+          +'</div>'
+        + '</div>'
 
         google.maps.event.addListener(marker, 'click', function() {
           if(imageUrls.length === 0){
@@ -155,59 +135,19 @@ angular.module('mapApp.map', [])
           } else {
             infowindow.setContent(imageTemplate);
           }
-          infowindow.open(map, this);
+          var that = this;
+          setTimeout(function(){
+            infowindow.open(map, that);
+          },500)
+          // infowindow.open(map, this);
         });
+        google.maps.event.addListener(infowindow, 'closeclick', function () {
+        map.setCenter(position); 
+        map.setZoom(17);
+});
       })
 
     })
-
-      // calculateAndDisplayRoute(directionsDisplay, directionsService, markerArray, stepDisplay, map);
-      // function calculateAndDisplayRoute(directionsDisplay, directionsService,
-      //     markerArray, stepDisplay, map) {
-      //   // First, remove any existing markers from the map.
-      //   for (var i = 0; i < markerArray.length; i++) {
-      //     markerArray[i].setMap(null);
-      //   }
-
-        // Retrieve the start and end locations and create a DirectionsRequest using
-        // WALKING directions.
-      //   directionsService.route(request, function(response, status) {
-      //     // Route the directions and pass the response to a function to create
-      //     // markers for each step.
-      //     if (status === 'OK') {
-      //       // document.getElementById('warnings-panel').innerHTML =
-      //       //     '<b>' + response.routes[0].warnings + '</b>';
-      //       directionsDisplay.setDirections(response);
-      //       showSteps(response, markerArray, stepDisplay, map);
-      //     } else {
-      //       window.alert('Directions request failed due to ' + status);
-      //     }
-      //   });
-      // }
-
-
-      // function showSteps(directionResult, markerArray, stepDisplay, map) {
-      //   // For each step, place a marker, and add the text to the marker's infowindow.
-      //   // Also attach the marker to an array so we can keep track of it and remove it
-      //   // when calculating new routes.
-      //   var myRoute = directionResult.routes[0].legs[0];
-      //   for (var i = 0; i < myRoute.steps.length; i++) {
-      //     var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
-      //     marker.setMap(map);
-      //     marker.setPosition(myRoute.steps[i].start_location);
-      //     attachInstructionText(
-      //         stepDisplay, marker, myRoute.steps[i].instructions, map);
-      //   }
-      // }
-
-      // function attachInstructionText(stepDisplay, marker, text, map) {
-      //   google.maps.event.addListener(marker, 'click', function() {
-      //     // Open an info window when the marker is clicked on, containing the text
-      //     // of the step.
-      //     stepDisplay.setContent(text);
-      //     stepDisplay.open(map, marker);
-      //   });
-      // }
 
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
@@ -221,8 +161,8 @@ angular.module('mapApp.map', [])
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
-                          'Error: The Geolocation service failed.' :
-                          'Error: Your browser doesn\'t support geolocation.');
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.');
   };
 
 });
