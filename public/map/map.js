@@ -11,7 +11,6 @@ angular.module('mapApp.map', [])
     } else {
       $rootScope.mapRender = false;
     }
-
     console.log($rootScope.mapRender);
   });
 
@@ -20,44 +19,13 @@ angular.module('mapApp.map', [])
       center: {lat: 40.750222, lng: -73.990282}, // Manhattan
       zoom: 12
     });
-    findUser(tourMap);
+    fsSearch(tourMap);
   };
 
-  // HTML5 GEOLOCATION
-
-  function findUser(map) {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var currPos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        fsSearch(currPos, map);
-      }, function() {
-        handleLocationError(true, infoWindow, map.getCenter());
-      });
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
-    }
-  };
-
-  // FOURSQUARE API CALL
-
-  function fsSearch(position, map) {
+  function fsSearch(map) {
     $scope.fsState = 'loading';
 
-    // sets location based on entered location or Geolocation
-    var latitude;
-    var longitude;
-    if($rootScope.address === undefined){
-      latitude = position.lat;
-      longitude = position.lng;
-    } else {
-      latitude = $rootScope.lat;
-      longitude = $rootScope.lng;
-    }
-    var data = {"latitude": latitude, "longitude": longitude}
+    var data = {"latitude": $rootScope.coords.lat, "longitude": $rootScope.coords.lng}
     $http.post('/api/foursquare', data)
       .then(function(result, status) {
         // console.log(result, "RESULT from FOURSQUARE")
@@ -100,7 +68,7 @@ angular.module('mapApp.map', [])
         console.log(fsPlacesLatLng, "waypointsssss");
         //the start and end is based on position which is the current location position not entered
         // setTimeout(function(){
-          drawTour(position, map, fsPlacesLatLng);
+          drawTour($rootScope.coords, map, fsPlacesLatLng);
         // }, 6000)
         // drawTour(position, map, fsPlacesLatLng);
       }, function(data, status) {
