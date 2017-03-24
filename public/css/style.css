@@ -383,7 +383,9 @@ body {
   z-index: 1000;
 }
 
-
+ul.nav li {
+  transition: all 0.35s;
+}
 
 
 /*------------------------*/
@@ -840,7 +842,9 @@ li:hover, li:focus {
   width: 60px;
   border-radius: 50%;
   /* offset-x | offset-y | blur-radius | spread-radius | color */
-  box-shadow: 0 0 15px 2px rgba(200, 200, 200, 0.5);
+  box-shadow: 0 0 10px 8px rgba(50, 50, 50, 0.5);
+  filter: grayscale(100%);
+  opacity: 0.9;
 }
 
 @media(min-width:768px) {
