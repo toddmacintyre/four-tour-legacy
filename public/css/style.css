@@ -322,7 +322,7 @@ fieldset[disabled] .btn-primary.active {
 .btn {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   border: none;
-  border-radius: 300px;
+  border-radius: 10px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -584,13 +584,221 @@ body {
 #wrapper#wrapper::-webkit-scrollbar {
     width: 1em;
 }
- 
+
 #wrapper::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
- 
+
 #wrapper::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+
 */
+
+
+.dropdown-toggle {
+  /*padding: 15px 30px;*/
+  width: 222px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+  background-color: #F05F40;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  width: 222px;
+  /*padding: 15px 30px;*/
+  margin-top: -5px;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  background-color: #F05F40;
+  border-radius: 0 0 10px 10px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  vertical-align: middle;
+  cursor: pointer;
+
+}
+
+#geoLocator {
+  background-color: white;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-radius: 10px 0 0 10px !important;
+  margin-right: -4px;
+}
+
+.origin-input {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: #F05F40;
+  height: 50px;
+  width: 36vw !important;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-radius: 0 10px 10px 0 !important;
+  outline: none;
+}
+
+.fa-location-arrow {
+  margin-top 3px;
+  color: #F05F40;
+}
+
+.destination-input {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: #F05F40;
+  height: 50px;
+  width: 40.5vw !important;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-radius: 10px !important;
+  outline: none;
+  text-indent: 10px
+}
+
+li:hover, li:focus {
+  background-color: #ee4b28;
+}
+
+
+/*Splash Page===================================================================*/
+/*.form-group .btn:focus {
+  outline: none;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  background-color: #90589A;
+}
+.navbar-default {
+  border-color: #90589A;
+}
+.navbar-brand {
+  color: white !important;
+}
+.splashPageImg {
+    width: 100vw;
+    height: 60vh;
+    background-position: center;
+    background-image: url('../assets/crowd2.jpg');
+    background-size: cover;
+    box-shadow: 2px 0px 10px #2d1c31;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input {
+  height: 50px;
+  width: 36vw !important;
+  background-color: white;
+  box-shadow: 6px 6px 10px #2d1c31;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-radius: 0 10px 10px 0 !important;
+  outline: none;
+}
+#stalkButton {
+  border-color: #90589A;
+    background-color: white;
+    box-shadow: 6px 6px 10px #2d1c31;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 300;
+    border: none;
+    border-radius: 10px 0 0 10px !important;
+    margin-right: -2px;
+}
+.searchHeader {
+  color: #FFFFFF;
+  font-size: 4.5em;
+  text-shadow: 1px 1px 1px #7D5C87;
+}
+
+.searchSubHeader {
+  color: #FFFFFF;
+  font-size: 1.5em;
+  text-shadow: 1px 1px 1px #7D5C87;
+  margin-bottom: 1.5%;
+}
+.splashSearch {
+  height:10px;
+}
+
+.splash-submit {
+  border-color: #90589A;
+  background-color: #90589A;
+  box-shadow: 6px 6px 10px #2d1c31;
+  color: #FFFFFF;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 300;
+  margin-left: 1vw;
+  border: 2px solid #90589A;
+  border-radius: 10px !important;
+}
+
+.splash-submit:hover {
+  color: #FFFFFF !important;
+}
+
+.submitter {
+  color: #FFFFFF !important;
+}
+
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .catButtons .btn {
+      margin-bottom: 5%;
+    }
+    .copyright {
+      position: absolute;
+      bottom: -220%;
+    }
+    .searchHeader {
+      font-size: 2.3em;
+      margin-bottom: 5%;
+    }
+    .searchSubHeader {
+      font-size: 1em ;
+    }
+    .splash-form {
+      display: flex;
+      flex-direction: row;
+      margin-top: 5%;
+      width: 100%;
+    }
+    #stalkButton {
+      display: none;
+    }
+    .search-input {
+      margin-left: 1%;
+      width: 70vw !important;
+      border-radius: 10px !important;
+    }*/
+
