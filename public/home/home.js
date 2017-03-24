@@ -48,6 +48,7 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
   // }
 
   $scope.getTour = function() {
+  	console.log('IN GET TOUR');
   	$rootScope.chosenCategoryId = $scope.chosenCategory.catId;
   	if(!$rootScope.origin || $scope.chosenCategory.name === "Choose a category") {
   		alert('Please make sure you have chosen a starting point and category');
