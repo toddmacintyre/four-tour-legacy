@@ -19,8 +19,8 @@ angular.module('mapApp.map', [])
       center: {lat: 40.750222, lng: -73.990282}, // Manhattan
       zoom: 12
     });
-    fsSearch(tourMap);
-    // getYelp(tourMap)
+    //fsSearch(tourMap);
+    getYelp(tourMap);
   };
 
   function fsSearch(map) {
@@ -230,7 +230,7 @@ angular.module('mapApp.map', [])
         var yelpPlaces = result.data.businesses;
         var yelpPlacesData = [];
         yelpPlaces.forEach(function(place) {
-            var addressString = `${place.name}, ${place.location.address1}, ${place.location.city}, ${place.location.state}, ${place.venue.location.country}`;
+            var addressString = `${place.name}, ${place.location.address1}, ${place.location.city}, ${place.location.state}, ${place.location.country}`;
             console.log(addressString);
             yelpPlacesData.push(
               {
@@ -239,7 +239,7 @@ angular.module('mapApp.map', [])
               });
         });
         $scope.fsState = 'loaded';
-        console.log(fsPlacesLatLng, "waypointsssss");
+        console.log(yelpPlacesData, "waypointsssss");
         //the start and end is based on position which is the current location position not entered
         // setTimeout(function(){
         drawTour($rootScope.coords, map, yelpPlacesData);
@@ -247,7 +247,7 @@ angular.module('mapApp.map', [])
         // drawTour(position, map, fsPlacesLatLng);
       // }, function(data, status) {
       //   $scope.fsState = 'noResult';
-      // })
+      })
       .catch(function(error) {
         console.log('FRONTEND YELP API ERROR = ', error);
       });

@@ -7,19 +7,18 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
 	$scope.radiusDefault = {plain: 'Choose a search radius'}
 	$scope.chosenCategory = $scope.categoryDefault;
 	$scope.chosenRadius = $scope.radiusDefault;
-	$scope.categories = [{name: "Coffee", catId: "4bf58dd8d48988d1e0931735"},
-											{name: "Bakeries", catId: "4bf58dd8d48988d16a941735"},
-											{name: "Booze",catId: "4bf58dd8d48988d116941735"},
-											// {name: "Food", catId: "4d4b7105d754a06374d81259"},
-											{name: "Fun", catId: "4d4b7104d754a06370d81259"},
-											{name: "Threads", catId: "4bf58dd8d48988d103951735"},
-											{name: "History", catId: "4deefb944765f83613cdba6e"}];
-	// $scope.categories = [{name: "Coffee", catId: "coffee"},
-	// 										{name: "Bakeries", catId: "bakeries"},
-	// 										{name: "Booze",catId: "bars"},
-	// 										{name: "Fun", catId: "active"},
-	// 										{name: "Threads", catId: "fashion"},
-	// 										{name: "History", catId: "landmarks"}];
+	// $scope.categories = [{name: "Coffee", catId: "4bf58dd8d48988d1e0931735"},
+	// 										{name: "Bakeries", catId: "4bf58dd8d48988d16a941735"},
+	// 										{name: "Booze",catId: "4bf58dd8d48988d116941735"},
+	// 										{name: "Fun", catId: "4d4b7104d754a06370d81259"},
+	// 										{name: "Threads", catId: "4bf58dd8d48988d103951735"},
+	// 										{name: "History", catId: "4deefb944765f83613cdba6e"}];
+	$scope.categories = [{name: "Coffee", catId: "coffee"},
+											{name: "Bakeries", catId: "bakeries"},
+											{name: "Booze",catId: "bars"},
+											{name: "Fun", catId: "active"},
+											{name: "Threads", catId: "fashion"},
+											{name: "History", catId: "landmarks"}];
 	$scope.radii = [{plain: "1/4 mile", meters: 402},
 									{plain: "1/2 mile", meters: 805},
 									{plain: "3/4 mile", meters: 1207},
@@ -89,7 +88,7 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
 
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
       $rootScope.origin = $scope.origin.getPlace().geometry.location;
-      console.log('AUTOCOMPLETE ORIGIN = ', $rootScope.origin);
+      console.log('AUTOCOMPLETE ORIGIN = ', $rootScope.origin.formattedAddress);
       console.log('ORIGIN.LAT = ', $rootScope.origin.lat());
       // var dest = $scope.destination.getPlace().geometry.location;
       // $rootScope.origin.lat = origin.lat();

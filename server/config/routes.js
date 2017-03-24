@@ -28,7 +28,8 @@ module.exports = function (app, express) {
   })
 
   app.post('/api/yelp', function (req, res) {
-    yelp.options.qs = req.body.qs;
+    console.log('IN YELP BACKEND, REQ === ', req);
+    yelp.options.qs = req.body;
     request(yelp.options, function (error, response, body) {
       if (error) {
         console.log('YELP GET ERROR ', error);
