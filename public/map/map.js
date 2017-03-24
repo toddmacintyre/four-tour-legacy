@@ -2,7 +2,7 @@ angular.module('mapApp.map', [])
 .controller('mapCtrl', function($rootScope, $scope, $window, $http, $location) {
 
   // INITIALIZE GOOGLE MAP
-  
+
   $rootScope.mapRender = true;
   $rootScope.$on("$locationChangeStart", function() {
     console.log($location.path())
@@ -11,7 +11,7 @@ angular.module('mapApp.map', [])
     } else {
       $rootScope.mapRender = false;
     }
-    
+
     console.log($rootScope.mapRender);
   });
 
@@ -94,7 +94,7 @@ angular.module('mapApp.map', [])
               stopover: true
             }
           );
-        }); 
+        });
 
         $scope.fsState = 'loaded';
         console.log(fsPlacesLatLng, "waypointsssss");
@@ -116,11 +116,11 @@ angular.module('mapApp.map', [])
     var directionsDisplay = new google.maps.DirectionsRenderer(
       {
         // suppressMarkers: true,
-        // suppressInfoWindows: true, 
+        // suppressInfoWindows: true,
         polylineOptions: { strokeColor: "green" }
       });
 
-    
+
     // var stepDisplay = new google.maps.InfoWindow;
     // var markerArray = [];
 
@@ -148,6 +148,7 @@ angular.module('mapApp.map', [])
     var infowindow = new google.maps.InfoWindow();
     var service = new google.maps.places.PlacesService(map);
     directionsService.route(request, function (response, status) {
+
       // console.log(response, "RESPONse from google ROUTES")
 
       response.geocoded_waypoints.forEach(function(elle){
@@ -239,8 +240,6 @@ angular.module('mapApp.map', [])
       //     stepDisplay.open(map, marker);
       //   });
       // }
-
-
 
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
