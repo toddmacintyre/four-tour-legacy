@@ -3,8 +3,10 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
 .controller('homeCtrl', function($rootScope, $scope, $location, $http, mapping) {
 
 	$scope.locating = false;
-	$scope.pulldownDefault = {name: 'Choose a category'};
-	$scope.chosenCategory = $scope.pulldownDefault;
+	$scope.categoryDefault = {name: 'Choose a category'};
+	$scope.radiusDefault = {plain: 'Choose a search radius'}
+	$scope.chosenCategory = $scope.categoryDefault;
+	$scope.chosenRadius = $scope.radiusDefault;
 	$scope.categories = [{name: "Coffee", catId: "4bf58dd8d48988d1e0931735"},
 											{name: "Bakeries", catId: "4bf58dd8d48988d16a941735"},
 											{name: "Booze",catId: "4bf58dd8d48988d116941735"},
@@ -18,11 +20,20 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
 	// 										{name: "Fun", catId: "active"},
 	// 										{name: "Threads", catId: "fashion"},
 	// 										{name: "History", catId: "landmarks"}];
-
+	$scope.radii = [{plain: "1/4 mile", meters: 402},
+									{plain: "1/2 mile", meters: 805},
+									{plain: "3/4 mile", meters: 1207},
+									{plain: "1 mile", meters: 1609},
+									{plain: "2 miles", meters: 3219},
+									{plain: "NO LIMITS", meters: 40000}];
 
 
 	$scope.chooseCategory = function(category) {
   	$scope.chosenCategory = category;
+  }
+
+  $scope.chooseRadius = function(radius) {
+  	$scope.chosenRadius = radius;
   }
 
   $scope.geoLocate = function() {
@@ -56,8 +67,9 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
   $scope.getTour = function() {
   	console.log('IN GET TOUR');
   	$rootScope.chosenCategoryId = $scope.chosenCategory.catId;
-  	if(!$rootScope.origin || $scope.chosenCategory.name === "Choose a category") {
-  		alert('Please make sure you have chosen a starting point and category');
+  	$rootScope.radius = $scope.chosenRadius.meters;
+  	if(!$rootScope.origin || $scope.chosenCategory.name === "Choose a category" || $scope.chosenRadius.plain === "Choose a search radius") {
+  		alert('Please make sure you have chosen a starting point, category, and radius');
   	} else {
   		if (!$rootScope.useGeo) {
 				$rootScope.coords.lat = $rootScope.origin.lat();
@@ -70,7 +82,9 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
   $scope.reset = function() {
   	$scope.origin = '';
   	$rootScope.origin = $rootScope.user;
-  	$scope.chosenCategory = $scope.pulldownDefault;
+  	$scope.chosenCategory = $scope.categoryDefault;
+  	$scope.chosenRadius = $scope.radiusDefault;
+
   };
 
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){

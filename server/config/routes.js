@@ -47,6 +47,3 @@ module.exports = function (app, express) {
 //foursquare category search &categoryId=######. <--works best immediately after "?"
 //foursquare limit results &limit=######
 
-/* yelp
-/* https://api.yelp.com/v2/search?cll=lat,lng&category_filter=alias&sort=2&limit=
-

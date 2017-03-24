@@ -681,6 +681,10 @@ li:hover, li:focus {
   background-color: #ee4b28;
 }
 
+.dropdown-toggle:hover, .dropdown-toggle:focus {
+  background-color: #ee4b28;
+}
+
 
 /*Splash Page===================================================================*/
 /*.form-group .btn:focus {
