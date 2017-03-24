@@ -19,7 +19,8 @@ angular.module('mapApp.map', [])
       center: {lat: 40.750222, lng: -73.990282}, // Manhattan
       zoom: 12
     });
-    fsSearch(tourMap);
+    //fsSearch(tourMap);
+    getYelp(tourMap);
   };
 
   function fsSearch(map) {
@@ -215,6 +216,42 @@ angular.module('mapApp.map', [])
     });
   };
 
+  function getYelp(map) {
+    var qs = {
+                latitude: $rootScope.coords.lat,
+                longitude: $rootScope.coords.lng,
+                radius: $rootScope.radius,
+                categories: $rootScope.chosenCategoryId,
+                limit: $rootScope.limit,
+                sort_by: $rootScope.sortBy
+              };
+    $http.post('/api/yelp', qs)
+      .then(function (result,status) {
+        var yelpPlaces = result.data.businesses;
+        var yelpPlacesData = [];
+        yelpPlaces.forEach(function(place) {
+            var addressString = `${place.name}, ${place.location.address1}, ${place.location.city}, ${place.location.state}, ${place.location.country}`;
+            console.log(addressString);
+            yelpPlacesData.push(
+              {
+                location:addressString,
+                stopover: true
+              });
+        });
+        $scope.fsState = 'loaded';
+        console.log(yelpPlacesData, "waypointsssss");
+        //the start and end is based on position which is the current location position not entered
+        // setTimeout(function(){
+        drawTour($rootScope.coords, map, yelpPlacesData);
+        // }, 6000)
+        // drawTour(position, map, fsPlacesLatLng);
+      // }, function(data, status) {
+      //   $scope.fsState = 'noResult';
+      })
+      .catch(function(error) {
+        console.log('FRONTEND YELP API ERROR = ', error);
+      });
+  };
 
   // ERROR HANDLER
 

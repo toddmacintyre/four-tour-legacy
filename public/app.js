@@ -22,11 +22,14 @@ angular.module("mapApp", [
   })
 
   .run(function($rootScope,mapping) {
-      $rootScope.user = '';
-      $rootScope.origin;
-      $rootScope.coords = {};
-      $rootScope.located = false;
-      $rootScope.chosenCategoryId = '';
-      $rootScope.useGeo = false;
-      mapping.userLocator();
+    $rootScope.located = false;
+    $rootScope.useGeo = false;
+    $rootScope.radius = 1000;
+    $rootScope.user = '';
+    $rootScope.origin;
+    $rootScope.coords = {};
+    $rootScope.chosenCategoryId = '';
+    $rootScope.limit = 5;
+    $rootScope.sortBy = "rating";
+    mapping.userLocator();
   })
