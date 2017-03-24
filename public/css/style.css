@@ -593,7 +593,6 @@ body {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
-
 */
 
 
@@ -659,7 +658,7 @@ body {
 }
 
 .fa-location-arrow {
-  margin-top 3px;
+  margin-top: 3px;
   color: #F05F40;
 }
 
@@ -802,3 +801,66 @@ li:hover, li:focus {
       border-radius: 10px !important;
     }*/
 
+
+/*------------------------*/
+/* Contact */
+/*------------------------*/
+
+.contact-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /*margin: auto;*/
+  width: 100%;
+}
+
+.contact-header {
+  padding-top: 20px;
+}
+
+.contact-container h4 {
+  font-size: 1em !important;
+}
+
+.dev-team {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  /*text-align: center;*/
+}
+
+.team-member {
+  color: #fff;
+}
+
+.dev-team img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 0 0 15px 2px rgba(200, 200, 200, 0.5);
+}
+
+@media(min-width:768px) {
+  .dev-team {
+    width: 60%;
+  }
+
+  .dev-team img {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+/*.dev-team::after {
+  content: "Look at this orange box.";
+  background-color: #FFBA10;
+  border-color: black;
+  border-style: dotted;
+}*/
+
+/*------------------------*/
+/* End Contact */
+/*------------------------*/
