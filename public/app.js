@@ -6,25 +6,27 @@ angular.module("mapApp", [
   "four-tour-svcs"
 ])
 
-.config(function($routeProvider) {
-  $routeProvider
-  .when('/', {
-    templateUrl: "./home/home.html",
-    controller: "homeCtrl"
+  .config(function($routeProvider) {
+    $routeProvider
+    .when('/', {
+      templateUrl: "./home/home.html",
+      controller: "homeCtrl"
+    })
+    .when('/map', {
+      templateUrl: "./map/map.html",
+      controller: "mapCtrl"
+    })
+    .when('/contact', {
+      templateUrl: "./contact/contact.html"
+    });
   })
-  .when('/map', {
-    templateUrl: "./map/map.html",
-    controller: "mapCtrl"
+
+  .run(function($rootScope,mapping) {
+      $rootScope.user = '';
+      $rootScope.origin;
+      $rootScope.coords = {};
+      $rootScope.located = false;
+      $rootScope.chosenCategoryId = '';
+      $rootScope.useGeo = false;
+      mapping.userLocator();
   })
-})
-
-.run(function($rootScope,mapping) {
-    $rootScope.user = '';
-    $rootScope.origin;
-    $rootScope.coords = {};
-    $rootScope.located = false;
-    $rootScope.chosenCategoryId = '';
-    $rootScope.useGeo = false;
-    mapping.userLocator();
-})
-
