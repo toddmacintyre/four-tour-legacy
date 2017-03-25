@@ -25,8 +25,9 @@ angular.module("mapApp", [
     $rootScope.located = false;
     $rootScope.useGeo = false;
     $rootScope.radius = 1000;
-    $rootScope.user = '';
+    $rootScope.user = {};
     $rootScope.origin;
+    $rootScope.localAddr;
     $rootScope.coords = {};
     $rootScope.chosenCategoryId = '';
     $rootScope.limit = 5;

@@ -1,4 +1,5 @@
-var yelpAuth = process.env.YELP_AUTH === undefined ? require(__dirname+'../../.env') : process.env.YELP_AUTH
+require('dotenv').config()
+// var yelpAuth = process.env.YELP_AUTH === undefined ? require(__dirname+'../../.env') : process.env.YELP_AUTH
 
 module.exports = {
     options: {  method: 'GET',
@@ -11,6 +12,6 @@ module.exports = {
                         limit: '5',
                         sort_by: 'rating' },
                 headers:
-                    {   authorization: yelpAuth }
+                    {   authorization: process.env.YELP_AUTH }
             }
 };

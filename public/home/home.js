@@ -33,7 +33,7 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
   	$scope.locating = true;
   	if ($rootScope.located) {
   		setTimeout(function() {
-  			$scope.origin = $rootScope.origin;
+  			$scope.origin = $rootScope.localAddr;
   			$rootScope.useGeo = true;
   			$scope.locating = false;
     		$scope.$apply();
@@ -49,22 +49,28 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
   	console.log('IN GET TOUR');
   	$rootScope.chosenCategoryId = $scope.chosenCategory.catId;
   	$rootScope.radius = $scope.chosenRadius.meters;
-  	if(!$rootScope.origin || $scope.chosenCategory.name === "Choose a category" || $scope.chosenRadius.plain === "Choose a search radius") {
+  	if(!$scope.origin || $scope.chosenCategory.name === "Choose a category" || $scope.chosenRadius.plain === "Choose a search radius") {
   		alert('Please make sure you have chosen a starting point, category, and radius');
   	} else {
+
+  		if ($rootScope.useGeo) {
+				$rootScope.coords.lat = $rootScope.user.lat;
+        $rootScope.coords.lng = $rootScope.user.lng;
+  		}
   		$location.path('/map');
   	}
   };
 
   $scope.reset = function() {
   	$scope.origin = '';
-  	$rootScope.origin = $rootScope.user;
+  	$rootScope.origin = $rootScope.localAddr;
   	$scope.chosenCategory = $scope.categoryDefault;
   	$scope.chosenRadius = $scope.radiusDefault;
 
   };
 
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+      $rootScope.useGeo = false;
       var temp = $scope.origin.getPlace().geometry.location;
       $rootScope.coords.lat = temp.lat();
       $rootScope.coords.lng = temp.lng();
@@ -74,43 +80,3 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
 	});
 
 })
-
-
-
-
-/*function fsSearch(position, map) {
-    $scope.fsState = 'loading';
-
-    // sets location based on entered location or Geolocation
-    var latitude;
-    var longitude;
-    if($rootScope.address === undefined){
-      latitude = position.lat;
-      longitude = position.lng;
-    } else {
-      latitude = $rootScope.lat;
-      longitude = $rootScope.lng;
-    }
-    var data = {"latitude": latitude, "longitude": longitude}
-    $http.post('/api/foursquare', data)
-      .then(function(result, status) {
-        var fsPlaces = result.data.response.groups[0].items;
-        var fsPlacesLatLng = [];
-        fsPlaces.forEach(function(place) {
-          fsPlacesLatLng.push(
-            {
-              location: {
-                lat: place.venue.location.lat,
-                lng: place.venue.location.lng
-              },
-              stopover: true
-            }
-          );
-        });
-        $scope.fsState = 'loaded';
-        //the start and end is based on position which is the current location position not entered
-        drawTour(position, map, fsPlacesLatLng);
-      }, function(data, status) {
-        $scope.fsState = 'noResult';
-      });
-  };*/
