@@ -822,11 +822,11 @@ li:hover, li:focus {
 
 #infoWin2 .placeTitle {
   font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 22px;
+  font-size: 23px;
   font-weight: bold;
   padding: 10px;
-  background-color: #48b5e9;
-  color: white;
+  background-color: #083045;
+  color: #E7E9E7;
   border: 5px solid #fff; 
   text-align: center;
 }
@@ -846,24 +846,18 @@ li:hover, li:focus {
 #infoWin2 .infoImage img:nth-child(-n+2) {
   width: 50%; 
 }
-#infoWin2 .telAndLink {
+#infoWin2 .trp {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 21px;
+  font-weight: bold;
+
+  background-color: #0D3C55;
+  color:#F6F7F7;
   display: block;
   clear: both;
+  border: 1px solid #F6F7F7;
 }
 
-/*.thumbnail:hover {
-    position:relative;
-    top:-25px;
-    left:-35px;
-    width:500px;
-    height:auto;
-    display:block;
-    z-index:999;
-}*/
-
-/*.thumbnail { 
-    transition: all .2s ease-in-out; 
-}*/
 
 #infoWin1 {
   /*    position: relative;*/
@@ -888,8 +882,8 @@ li:hover, li:focus {
   font-size: 22px;
   font-weight: bold;
   padding: 10px;
-  background-color: #48b5e9;
-  color: white;
+  background-color: #083045;
+  color:#F6F7F7;
   border: 5px solid #fff; 
   text-align: center;
 }
