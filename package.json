@@ -24,7 +24,8 @@
     "mongo": "^0.1.0",
     "mongoose": "^4.8.6",
     "morgan": "^1.8.1",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "string-similarity": "^1.1.0"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^2.0.0",
