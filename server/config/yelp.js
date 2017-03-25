@@ -1,3 +1,5 @@
+var yelpAuth = process.env.YELP_AUTH === undefined ? require(__dirname+'../../.env') : process.env.YELP_AUTH
+
 module.exports = {
     options: {  method: 'GET',
                 url: 'https://api.yelp.com/v3/businesses/search',
@@ -9,6 +11,6 @@ module.exports = {
                         limit: '5',
                         sort_by: 'rating' },
                 headers:
-                    {   authorization: 'Bearer jC_tU-Vssh8bT9a5xSIpkabqPZIUSRcY_clNDZuDiq10c5Ke_HdM-u0zSB_NBCeHL_UzJgpb5DH0w5_fyM8BsGF7Px5ulMkVT6itwNp_HHusuuSb3oxTVwFe83LVWHYx' }
+                    {   authorization: yelpAuth }
             }
 };
