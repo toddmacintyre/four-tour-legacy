@@ -7,12 +7,6 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
 	$scope.radiusDefault = {plain: 'Choose a search radius'}
 	$scope.chosenCategory = $scope.categoryDefault;
 	$scope.chosenRadius = $scope.radiusDefault;
-	// $scope.categories = [{name: "Coffee", catId: "4bf58dd8d48988d1e0931735"},
-	// 										{name: "Bakeries", catId: "4bf58dd8d48988d16a941735"},
-	// 										{name: "Booze",catId: "4bf58dd8d48988d116941735"},
-	// 										{name: "Fun", catId: "4d4b7104d754a06370d81259"},
-	// 										{name: "Threads", catId: "4bf58dd8d48988d103951735"},
-	// 										{name: "History", catId: "4deefb944765f83613cdba6e"}];
 	$scope.categories = [{name: "Coffee", catId: "coffee"},
 											{name: "Bakeries", catId: "bakeries"},
 											{name: "Booze",catId: "bars"},
@@ -51,19 +45,7 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
     console.log('GEOLOCATE ORIGIN = ', $rootScope.origin);
   };
 
-  // $scope.originScreener = function() {
-  // 	if ($rootScope.useGeo) {
-  // 		$scope.getTour();
-  // 	} else {
-  // 		$rootScope.origin = $scope.origin;
-  // 		mapping.latLngFinder($scope.origin, function() {
-  // 			console.log('FINISHED LATLNGFINDER CALL IN HOME.JS');
-  // 		});
-  // 		$scope.getTour();
-  // 	}
-  // }
-
-  $scope.getTour = function() {
+ $scope.getTour = function() {
   	console.log('IN GET TOUR');
   	$rootScope.chosenCategoryId = $scope.chosenCategory.catId;
   	$rootScope.radius = $scope.chosenRadius.meters;
@@ -87,14 +69,12 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
   };
 
 	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
-      $rootScope.origin = $scope.origin.getPlace().geometry.location;
-      console.log('AUTOCOMPLETE ORIGIN = ', $rootScope.origin.formattedAddress);
-      console.log('ORIGIN.LAT = ', $rootScope.origin.lat());
-      // var dest = $scope.destination.getPlace().geometry.location;
-      // $rootScope.origin.lat = origin.lat();
-      // $rootScope.origin.lng = origin.lng();
-      // $rootScope.destination.lat = dest.lat();
-      // $rootScope.destination.lng = dest.lng();
+      var temp = $scope.origin.getPlace().geometry.location;
+      $rootScope.coords.lat = temp.lat();
+      $rootScope.coords.lng = temp.lng();
+      console.log("SCOPE ORIGIN CLEAN = ", $scope.origin.gm_accessors_.place.Ac.formattedPrediction);
+      console.log('ORIGIN.LAT = ', temp.lat());
+
 	});
 
 })
