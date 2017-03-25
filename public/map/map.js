@@ -84,7 +84,7 @@ angular.module('mapApp.map', [])
     var service = new google.maps.places.PlacesService(map);
     directionsService.route(request, function (response, status) {
 
-      // console.log(response, "RESPONse from google ROUTES")
+      console.log(response, "RESPONse from google ROUTES")
 
       response.geocoded_waypoints.forEach(function(elle){
       // placeIds.push(elle.place_id);
