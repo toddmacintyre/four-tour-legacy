@@ -3,45 +3,15 @@ angular.module('mapApp.map', [])
 
   // INITIALIZE GOOGLE MAP
 
-  $rootScope.mapRender = true;
-  $rootScope.$on("$locationChangeStart", function() {
-    console.log($location.path())
-    if ($location.path() === "/map") {
-      $rootScope.mapRender = true;
-    } else {
-      $rootScope.mapRender = false;
-      $("#wrapper").removeClass("toggled");
-    }
-    console.log($rootScope.mapRender);
-  });
-
-  $scope.initMap = function() {
-    var tourMap = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 40.750222, lng: -73.990282}, // Manhattan
-      zoom: 12
-    });
-    //fsSearch(tourMap);
-    getYelp(tourMap);
-  };
-
-  function fsSearch(map) {
-    $scope.fsState = 'loading';
-
-    var data = {"latitude": $rootScope.coords.lat, "longitude": $rootScope.coords.lng}
-    $http.post('/api/foursquare', data)
-      .then(function(result, status) {
-        // console.log(result, "RESULT from FOURSQUARE")
-        var fsPlaces = result.data.response.groups[0].items;
-        var fsPlacesLatLng = [];
-        fsPlaces.forEach(function(place) {
-          var addressString = `${place.venue.name}, ${place.venue.location.address}, ${place.venue.location.city}, ${place.venue.location.state}, ${place.venue.location.cc}`;
-          console.log(addressString);
-          fsPlacesLatLng.push(
-            {
-              location:addressString,
-              stopover: true
+        $rootScope.mapRender = true;
+        $rootScope.$on("$locationChangeStart", function() {
+            console.log($location.path())
+            if ($location.path() === "/map") {
+                $rootScope.mapRender = true;
+            } else {
+                $rootScope.mapRender = false;
+                $("#wrapper").removeClass("toggled");
             }
-            console.log($rootScope.mapRender);
         });
 
         $scope.initMap = function() {
