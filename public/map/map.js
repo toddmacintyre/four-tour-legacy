@@ -108,25 +108,25 @@ angular.module('mapApp.map', [])
 
         // markerArray.push(marker);
         console.log(imageUrls, "URLSSSSS");
-        var template =  
-        '<div id="infoWin1">' 
+        var template =
+        '<div id="infoWin1">'
             +'<div class="placeTitle">'+ place.name + '</div>' +
             '<br>' + place.formatted_address +
             '<br>' + '<a style="color:blue;" target="_blank" href="+ place.url + ">' + "Google Maps Link." +'</a>' +
-            '<br>' 
+            '<br>'
             + '</div>'
-        var imageTemplate = 
+        var imageTemplate =
         '<div id="infoWin2">'
-          +'<div class="placeTitle">' + place.name+ '</div>' 
-          +'<div class = "placeSubTitle">' + place.formatted_address + '</div>' 
+          +'<div class="placeTitle">' + place.name+ '</div>'
+          +'<div class = "placeSubTitle">' + place.formatted_address + '</div>'
           +'<div class="infoImage">'
-            +'<img src = ' +  imageUrls[0] +'>' 
+            +'<img src = ' +  imageUrls[0] +'>'
             +'<img src =' + imageUrls[1] +'>'
             + '<img src =' + imageUrls[2] +'>'
-          + '</div><br>' 
+          + '</div><br>'
           +'<div class="telAndLink">'
-          + '<a style="color:blue;" target="_blank" href="+ place.url + ">' + "Google Maps Link." +'</a><br>' 
-          + "Tel: " + place.formatted_phone_number 
+          + '<a style="color:blue;" target="_blank" href="+ place.url + ">' + "Google Maps Link." +'</a><br>'
+          + "Tel: " + place.formatted_phone_number
           +'</div>'
         + '</div>'
 
@@ -143,7 +143,7 @@ angular.module('mapApp.map', [])
           // infowindow.open(map, this);
         });
         google.maps.event.addListener(infowindow, 'closeclick', function () {
-        map.setCenter(position); 
+        map.setCenter(position);
         map.setZoom(17);
 });
       })
