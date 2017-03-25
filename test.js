@@ -14,17 +14,28 @@ describe('Test the Test', function() {
 });
 
 describe('POST /api/geocode', function() {
-  it('respond with json', function(done) {
-    axios.post('/api/geocode', {
-        search: 'latlng=40.7504644,-73.976815',
-      })
+  it('responds with status 200', function(done) {
+    // Send a POST request 
+    axios({
+      method: 'post',
+      url: 'http://localhost:7337/api/geocode',
+      data: {
+        search: 'latlng=40.7504644,-73.976815'
+      },
+      timeout: 10000,
+      responseType: 'application/json'
+    })
+    // axios.post('http://localhost:7337/api/geocode', {
+    //     search: 'latlng=40.7504644,-73.976815'
+    //   })
       .then(function (response) {
-        console.log('+++++=+=+=+', response, '++++++++++++');
-        done();
+        // console.log('+++++=+=+=+', response.data, '++++++++++++');
+        response.status.should.equal(200);
+        return done();
       })
       .catch(function (error) {
-        console.log('----', error);
-        done();
+        throw new Error(error);
+        return done();
       });
   });
 });
