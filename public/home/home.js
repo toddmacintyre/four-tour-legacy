@@ -52,10 +52,6 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
   	if(!$rootScope.origin || $scope.chosenCategory.name === "Choose a category" || $scope.chosenRadius.plain === "Choose a search radius") {
   		alert('Please make sure you have chosen a starting point, category, and radius');
   	} else {
-  		if (!$rootScope.useGeo) {
-				$rootScope.coords.lat = $rootScope.origin.lat();
-        $rootScope.coords.lng = $rootScope.origin.lng();
-  		}
   		$location.path('/map');
   	}
   };
