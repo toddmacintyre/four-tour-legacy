@@ -52,6 +52,7 @@ angular.module('mapApp.home', ['gm','four-tour-svcs'])
   	if(!$scope.origin || $scope.chosenCategory.name === "Choose a category" || $scope.chosenRadius.plain === "Choose a search radius") {
   		alert('Please make sure you have chosen a starting point, category, and radius');
   	} else {
+
   		if ($rootScope.useGeo) {
 				$rootScope.coords.lat = $rootScope.user.lat;
         $rootScope.coords.lng = $rootScope.user.lng;
