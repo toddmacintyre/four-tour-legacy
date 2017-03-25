@@ -10,6 +10,7 @@ angular.module('mapApp.map', [])
                 $rootScope.mapRender = true;
             } else {
                 $rootScope.mapRender = false;
+                $("#wrapper").removeClass("toggled");
             }
             console.log($rootScope.mapRender);
         });
