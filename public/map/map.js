@@ -240,3 +240,4 @@ angular.module('mapApp.map', [])
         };
 
     });
+
