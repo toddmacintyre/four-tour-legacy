@@ -54,12 +54,12 @@
       </div>
     </div>
   </nav>
-  <header id="wrapper">
+  <header id="wrapper" ng-controller="sliderCtrl">
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper" class="sidebar-nav">
       <div id="directions-panel"></div>
-      <a ng-controller="sliderCtrl" ng-show="mapRender" ng-click="showDirections()" class="btn btn-default" id="menu-toggle">&nbsp;&nbsp;Directions</a>
+      <a ng-show="mapRender" ng-click="showDirections()" class="btn btn-default" id="menu-toggle">&nbsp;&nbsp;Directions</a>
     </div>
 
     <!-- /#sidebar-wrapper -->
