@@ -117,10 +117,10 @@ angular.module('mapApp.map', [])
                                 imageUrls.push(urlPic);
                             })
                         }
-                        var icon = "https://s15.postimg.org/rlm6kl1rf/iconiccopy.png";
+                        var iconIn = "https://s30.postimg.org/dibzxx0mp/icon.png";
                         var marker = new google.maps.Marker({
                             map: map,
-                            icon: "/img/icon.PNG",
+                            icon: iconIn,
                             position: place.geometry.location,
                             optimized: false
                         });
@@ -240,4 +240,3 @@ angular.module('mapApp.map', [])
         };
 
     });
-

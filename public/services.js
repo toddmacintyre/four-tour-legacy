@@ -12,7 +12,9 @@ angular.module('four-tour-svcs',[])
           $http({
             method: 'post',
             url: '/api/geocode',
-            data: {search: coordString}
+            data: {
+              considerIp: false,
+              search: coordString}
           })
             .then(function(data) {
               $rootScope.localAddr = data.data.results[0].formatted_address;
