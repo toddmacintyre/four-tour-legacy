@@ -1,7 +1,7 @@
 angular.module('mapApp.map', [])
-    .controller('mapCtrl', function($rootScope, $scope, $window, $http, $location) {
+.controller('mapCtrl', function($rootScope, $scope, $window, $http, $location) {
 
-        // INITIALIZE GOOGLE MAP
+  // INITIALIZE GOOGLE MAP
 
         $rootScope.mapRender = true;
         $rootScope.$on("$locationChangeStart", function() {
@@ -12,7 +12,6 @@ angular.module('mapApp.map', [])
                 $rootScope.mapRender = false;
                 $("#wrapper").removeClass("toggled");
             }
-            console.log($rootScope.mapRender);
         });
 
         $scope.initMap = function() {
