@@ -1,12 +1,49 @@
 <div>
-  <p>Submit an address or choose current location to get a personalized walking tour.</p>
-  <form class="form-inline" ng-submit="enterAddress()" ng-enter="enterAddress()">
-    <div class="form-group">
+  <p>For those interested in walking in a big loop and having strangers recommend pitstops.</p>
+  <form class="form-inline" ng-submit="" ng-enter="">
+<!--       <form class="form-inline" ng-submit="enterAddress()" ng-enter="enterAddress()">
+<div class="form-group">
       <input type="text" class="form-control" ng-model="$root.address" googleplace="" placeholder="Enter an address...">
+    </div> -->
+    <div class="form-group">
+      <button type="button" id="geoLocator" ng-click="geoLocate()">
+        <i ng-class="{'fa fa-location-arrow fa-2x fa-fw': (!locating), 'fa fa-location-arrow fa-spin fa-2x fa-fw': (locating) }" aria-hidden="true"></i>
+      </button>
     </div>
-    <button id="entered" type="submit" class="btn btn-primary btn-xl page-scroll">Search</button>
-    <p></p>
-    <button id="geo" type="submit" class="btn btn-primary btn-xl page-scroll">Search by Current Location</button>
+    <div class="form-group">
+      <input type="text" class="origin-input" ng-model="origin" placeholder="  Enter an address ..." gm-places-autocomplete>
+    </div>
+    <br>
+    <br>
+<!--     <div class="form-group">
+      <input type="text" class="destination-input" ng-model="destination" placeholder="    ... and tell us where you're going." gm-places-autocomplete>
+    </div>
+    <br>
+    <br>  -->
+    <div class="form-group btn-group">
+      <button class="dropdown-toggle" ng-model="category" type="button" id="categories" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{ chosenCategory.name }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="category in categories" ng-click="chooseCategory(category)"> {{category.name}} </li>
+      </ul>
+    </div>
+    <div class="form-group btn-group">
+      <button class="dropdown-toggle" ng-model="radius" type="button" id="radii" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{ chosenRadius.plain }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="radius in radii" ng-click="chooseRadius(radius)"> {{radius.plain}} </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    <button id="entered" type="submit" ng-click="getTour()" class="btn btn-primary btn-xl page-scroll">Search</button>
+    <br>
+    <br>
+    <button id="reset" type="submit" class="btn btn-primary btn-xl page-scroll" ng-click="reset()">Reset form</button>
   </form>
 
 </div>

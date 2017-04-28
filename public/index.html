@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Social-Generated Walking Tours</title>
+<title>Take a hike</title>
 
 <!-- Styles and Fonts -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -16,16 +16,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-route.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/4d26e92798.js"></script>
 
 <!-- Angular Scripts -->
+<script src="map/slider.js"></script>
 <script src="map/map.js"></script>
 <script src="home/home.js"></script>
+<script src="services.js"></script>
 <script src="app.js"></script>
 
 <!-- Google Maps Scripts -->
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvvtXqBG-JFeJrgzlKCNm-1GllQNiag1s&libraries=places">
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvvtXqBG-JFeJrgzlKCNm-1GllQNiag1s&libraries=places"></script>
+<script src="home/angularjs-google-maps.js"></script>
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -35,29 +38,43 @@
 </head>
 
 <body id="page-top">
-<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i> </button>
-      <a class="navbar-brand page-scroll" href="#page-top">Four Tour</a>
+
+  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> Menu </button>
+        <a class="navbar-brand page-scroll" href="#!/#page-top">Yelpschlep</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li> <a class="page-scroll" href="#!">About</a> </li>
+          <li> <a class="page-scroll" href="#!">Privacy</a> </li>
+          <li> <a class="page-scroll" href="#!/contact">Contact</a> </li>
+        </ul>
+      </div>
     </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li> <a class="page-scroll" href="#">About</a> </li>
-        <li> <a class="page-scroll" href="#">Privacy</a> </li>
-        <li> <a class="page-scroll" href="#">Contact</a> </li>
-      </ul>
+  </nav>
+  <header id="wrapper" ng-controller="sliderCtrl">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" class="sidebar-nav">
+      <div id="directions-panel"></div>
+      <a ng-show="mapRender" ng-click="showDirections()" class="btn btn-default" id="menu-toggle">&nbsp;&nbsp;Directions</a>
     </div>
-  </div>
-</nav>
-<header>
-  <div class="header-content">
-    <div class="header-content-inner">
-      <h1 id="homeHeading">Social Generated Walking Tours</h1>
-      <hr>
-      <div ng-view></div>
+
+    <!-- /#sidebar-wrapper -->
+
+    <div class="header-content">
+      <div class="header-content-inner">
+        <div ng-show="!mapRender">
+          <h1 id="homeHeading">YELPSCHLEP</h1>
+          <hr>
+        </div>
+        <div ng-view></div>
+      </div>
+
     </div>
-  </div>
-</header>
+  </header>
+
 </body>
 </html>

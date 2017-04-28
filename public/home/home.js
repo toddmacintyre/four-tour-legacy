@@ -1,38 +1,82 @@
-angular.module('mapApp.home', [])
-.controller('homeCtrl', function($rootScope, $scope, $location) {
+angular.module('mapApp.home', ['gm','four-tour-svcs'])
 
-  $scope.enterAddress = function() {
-		$location.path('/map');
-		console.log($rootScope.address)
+.controller('homeCtrl', function($rootScope, $scope, $location, $http, mapping) {
+
+	$scope.locating = false;
+	$scope.categoryDefault = {name: 'Choose a category'};
+	$scope.radiusDefault = {plain: 'Choose a search radius'}
+	$scope.chosenCategory = $scope.categoryDefault;
+	$scope.chosenRadius = $scope.radiusDefault;
+	$scope.categories = [{name: "Coffee", catId: "coffee"},
+											{name: "Bakeries", catId: "bakeries"},
+											{name: "Booze",catId: "bars"},
+											{name: "Fun", catId: "active"},
+											{name: "Threads", catId: "fashion"},
+											{name: "History", catId: "landmarks"}];
+	$scope.radii = [{plain: "1/4 mile", meters: 402},
+									{plain: "1/2 mile", meters: 805},
+									{plain: "3/4 mile", meters: 1207},
+									{plain: "1 mile", meters: 1609},
+									{plain: "2 miles", meters: 3219},
+									{plain: "NO LIMITS", meters: 40000}];
+
+
+	$scope.chooseCategory = function(category) {
+  	$scope.chosenCategory = category;
   }
-})
 
-.directive('googleplace', function($rootScope) {
-	return {
-		require : 'ngModel',
-		link : function(scope, element, attrs, model) {
-			var options = {
-				types : [],
-			};
-			//creating new autocomplete object when searching in input bar
-			scope.gPlace = new google.maps.places.Autocomplete(element[0],
-					options);
-			// on exiting search, it will listen for entered string before submitting
-			google.maps.event.addListener(scope.gPlace, 'place_changed',
-				function() {
-				  var geoComponents = scope.gPlace.getPlace();
-				  var latitude = geoComponents.geometry.location.lat();
-				  var longitude = geoComponents.geometry.location.lng();
-					scope.$apply(function() {
-					  // element.val is the searched address
-						model.$setViewValue(element.val());
-						//rootscope here allows for the other controllers to have access to these values
-						$rootScope.lat = latitude;
-						$rootScope.lng = longitude;
-						console.log(element.val())
-						console.log(latitude, longitude)
-					});
-				});
-		}
-	};
-});
+  $scope.chooseRadius = function(radius) {
+  	$scope.chosenRadius = radius;
+  }
+
+  $scope.geoLocate = function() {
+  	$scope.locating = true;
+  	if ($rootScope.located) {
+  		setTimeout(function() {
+  			$scope.origin = $rootScope.localAddr;
+  			$rootScope.useGeo = true;
+  			$scope.locating = false;
+    		$scope.$apply();
+  		}, 1750);
+  	} else {
+  		// console.log('RECURSION!!!');
+    	setTimeout($scope.geoLocate, 500);
+    }
+    console.log('GEOLOCATE ORIGIN = ', $rootScope.origin);
+  };
+
+ $scope.getTour = function() {
+  	console.log('IN GET TOUR');
+  	$rootScope.chosenCategoryId = $scope.chosenCategory.catId;
+  	$rootScope.radius = $scope.chosenRadius.meters;
+  	if(!$scope.origin || $scope.chosenCategory.name === "Choose a category" || $scope.chosenRadius.plain === "Choose a search radius") {
+  		alert('Please make sure you have chosen a starting point, category, and radius');
+  	} else {
+
+  		if ($rootScope.useGeo) {
+				$rootScope.coords.lat = $rootScope.user.lat;
+        $rootScope.coords.lng = $rootScope.user.lng;
+  		}
+  		$location.path('/map');
+  	}
+  };
+
+  $scope.reset = function() {
+  	$scope.origin = '';
+  	$rootScope.origin = $rootScope.localAddr;
+  	$scope.chosenCategory = $scope.categoryDefault;
+  	$scope.chosenRadius = $scope.radiusDefault;
+
+  };
+
+	$scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+      $rootScope.useGeo = false;
+      var temp = $scope.origin.getPlace().geometry.location;
+      $rootScope.coords.lat = temp.lat();
+      $rootScope.coords.lng = temp.lng();
+      console.log("SCOPE ORIGIN CLEAN = ", $scope.origin.gm_accessors_.place.Ac.formattedPrediction);
+      console.log('ORIGIN.LAT = ', temp.lat());
+
+	});
+
+})
