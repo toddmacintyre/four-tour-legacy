@@ -3,9 +3,7 @@
 
 ## Team
 
-  - __Product Owner__: Rich Serdici
-  - __Scrum Master__: Cameron Dunne
-  - __Development Team Members__: Viswada Yangala
+  - __Development Team Members__: [Todd MacIntyre](https://twitter.com/toddmacintyre), [Andrew Fechner](https://twitter.com/AndrewFechner), [Aamir Yousuf](https://twitter.com/whyaamir)
 
 ## Table of Contents
 
