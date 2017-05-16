@@ -827,7 +827,7 @@ li:hover, li:focus {
   padding: 10px;
   background-color: #083045;
   color: #E7E9E7;
-  border: 5px solid #fff; 
+  border: 5px solid #fff;
   text-align: center;
 }
 
@@ -836,15 +836,15 @@ li:hover, li:focus {
 }
 
 #infoWin2 .infoImage img {
-  width: 100%; 
-  display: block; 
-  float: left; 
-  border: 5px solid #fff; 
+  width: 100%;
+  display: block;
+  float: left;
+  border: 5px solid #fff;
   box-sizing: border-box;
 }
 
 #infoWin2 .infoImage img:nth-child(-n+2) {
-  width: 50%; 
+  width: 50%;
 }
 #infoWin2 .trp {
   font-family: 'Open Sans Condensed', sans-serif;
@@ -884,7 +884,7 @@ li:hover, li:focus {
   padding: 10px;
   background-color: #083045;
   color:#F6F7F7;
-  border: 5px solid #fff; 
+  border: 5px solid #fff;
   text-align: center;
 }
 
@@ -946,13 +946,6 @@ li:hover, li:focus {
     width: 100px;
   }
 }
-
-/*.dev-team::after {
-  content: "Look at this orange box.";
-  background-color: #FFBA10;
-  border-color: black;
-  border-style: dotted;
-}*/
 
 /*------------------------*/
 /* End Contact */
